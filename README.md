@@ -66,7 +66,7 @@ Contribuições são bem-vindas! Por favor, siga os passos abaixo:
 3. Submeta um pull request.
 
 ## Autor
-- Desenvolvido por [Seu Nome].
+- Desenvolvido por Anália Emília Souza.
 
 ## Licença
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
