@@ -19,8 +19,8 @@
     <!-- Hero Section -->
     <section id="midia" class="py-5 bg-light mt-5">
         <div class="container text-center">
-            <h1>Nossas Mídias</h1>
-            <p class="lead">Descubra a história e a paixão por trás do Salão de Beleza.</p>
+            <h1 class="sombra-simples">Nossas Mídias</h1>
+            <p class="lead sombra-simples">Descubra a história e a paixão por trás do Salão de Beleza.</p>
         </div>
     </section>
 

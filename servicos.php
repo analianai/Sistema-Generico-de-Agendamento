@@ -6,6 +6,8 @@
     <title>Serviços - Salão de Beleza</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- css-->
+    <link href="assets/css/styles.css" rel="stylesheet">
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
@@ -14,10 +16,10 @@
     <?php include './componentes/menu.php'; ?>
 
     <!-- Hero Section -->
-    <section class="py-5 bg-light mt-5">
+    <section id="servico" class="py-5 bg-light mt-5">
         <div class="container text-center">
-            <h1>Serviços</h1>
-            <p class="lead">Conheça todos os serviços que oferecemos para valorizar sua beleza.</p>
+            <h1 class="sombra-simples">Serviços</h1>
+            <p class="lead sombra-simples">Conheça todos os serviços que oferecemos para valorizar sua beleza.</p>
         </div>
     </section>
   
@@ -27,31 +29,31 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Corte de Cabelo">
+                        <img src="./assets/img/fotos.webp" height="275" class="card-img-top" alt="Corte de Cabelo">
                         <div class="card-body">
                             <h5 class="card-title">Corte de Cabelo</h5>
                             <p class="card-text">Cortes modernos e personalizados para realçar sua identidade.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCorteCabelo">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalCorteCabelo">Saiba mais</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Coloração">
+                        <img src="./assets/img/pintura.jpg" height="275" class="card-img-top" alt="Coloração">
                         <div class="card-body">
                             <h5 class="card-title">Coloração</h5>
                             <p class="card-text">Cores vibrantes e saudáveis para transformar seu visual.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalColoracao">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalColoracao">Saiba mais</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Manicure e Pedicure">
+                        <img src="./assets/img/manicure.webp" height="275" class="card-img-top" alt="Manicure e Pedicure">
                         <div class="card-body">
                             <h5 class="card-title">Manicure e Pedicure</h5>
                             <p class="card-text">Cuidado completo para suas unhas, com esmaltações perfeitas.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalManicure">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalManicure">Saiba mais</button>
                         </div>
                     </div>
                 </div>
@@ -59,31 +61,31 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Tratamento Capilar">
+                        <img src="./assets/img/luzes.png"  height="275" class="card-img-top" alt="Tratamento Capilar">
                         <div class="card-body">
                             <h5 class="card-title">Tratamento Capilar</h5>
                             <p class="card-text">Hidratações e tratamentos para manter seus cabelos saudáveis.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTratamentoCapilar">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalTratamentoCapilar">Saiba mais</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Maquiagem">
+                        <img src="./assets/img/makes.jpg"  height="275" class="card-img-top" alt="Maquiagem">
                         <div class="card-body">
                             <h5 class="card-title">Maquiagem</h5>
                             <p class="card-text">Makeup profissional para ocasiões especiais ou do dia a dia.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMaquiagem">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalMaquiagem">Saiba mais</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Depilação">
+                        <img src="./assets/img/depilacao.webp"  height="275" class="card-img-top" alt="Depilação">
                         <div class="card-body">
                             <h5 class="card-title">Depilação</h5>
                             <p class="card-text">Técnicas modernas e eficazes para uma pele lisa e macia.</p>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDepilacao">Saiba mais</button>
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalDepilacao">Saiba mais</button>
                         </div>
                     </div>
                 </div>

@@ -124,10 +124,10 @@
         </div>
     </section>
 
-    <!-- Comentários Section -->
+    <!-- Depoimentos Section -->
     <section id="comentarios" class="container-fluid py-5">
         <div class="container">
-        <h2>Comentários</h2>
+        <h2>Depoimentos</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-3">

@@ -19,8 +19,8 @@
     <!-- Hero Section -->
     <section id="sobre" class="py-5 bg-light mt-5">
         <div class="container text-center">
-            <h1>Sobre Nós</h1>
-            <p class="lead">Porque você merece ser cuidada e mimada de vez em quando!</p>
+            <h1 class="sombra-simples">Sobre Nós</h1>
+            <p class="lead sombra-simples">Porque você merece ser cuidada e mimada de vez em quando!</p>
         </div>
     </section>
 
@@ -34,14 +34,14 @@
                     <p>Nosso compromisso é proporcionar um ambiente acolhedor e serviços de altísima qualidade, utilizando produtos das melhores marcas do mercado.</p>
                 </div>
                 <div class="col-md-6">
-                    <img src="https://via.placeholder.com/600x400" class="img-fluid rounded" alt="Sobre Nós">
+                    <img src="./assets/img/sobre.jpg" class="img-fluid rounded" alt="Sobre Nós">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Missão, Visão e Valores -->
-    <section class="py-5 bg-light">
+    <section id="sobreMeio" class="py-5">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4">
@@ -66,22 +66,28 @@
             <h2 class="text-center mb-4">O que nossos clientes dizem</h2>
             <div class="row">
                 <div class="col-md-4">
-                    <blockquote class="blockquote">
-                        <p class="mb-0">"Ambiente maravilhoso e profissionais incríveis. Super recomendo!"</p>
-                        <footer class="blockquote-footer">Ana Maria</footer>
-                    </blockquote>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"A experiência foi maravilhosa! Ótimo atendimento e ambiente acolhedor."</p>
+                            <h5 class="card-title">- Ana Maria</h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <blockquote class="blockquote">
-                        <p class="mb-0">"A melhor experiência que já tive. Senti-me renovada!"</p>
-                        <footer class="blockquote-footer">João Silva</footer>
-                    </blockquote>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"A melhor experiência que já tive. Senti-me renovado!"</p>
+                            <h5 class="card-title">João Silva</h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <blockquote class="blockquote">
-                        <p class="mb-0">"Serviços impecáveis e atendimento excelente."</p>
-                        <footer class="blockquote-footer">Maria Clara</footer>
-                    </blockquote>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Serviços impecáveis e atendimento excelente."</p>
+                            <h5 class="card-title">Maria Clara</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -24,3 +24,22 @@
     background-size: cover;
     color: #fff;
 }
+#sobreMeio{
+    background-color: rgb(228, 227, 227);
+}
+
+#servico {
+    background: url('../img/makes.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    height: 200px;
+}
+#faq {
+    background: url('../img/FAQ.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    height: 200px;
+}
+#faqMeio{
+    background-color: rgb(228, 227, 227) !important;
+}
