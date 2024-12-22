@@ -37,19 +37,22 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                         <li>
                             <a class="dropdown-item" href="admin_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
-                    <?php elseif ($nivel_acesso == USER): ?>
                         <li>
-                            <a class="dropdown-item" href="user_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a>
+                            <a class="dropdown-item" href="admin_perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
                         </li>
+                    <?php elseif ($nivel_acesso == USER): ?>
                         <li>
                             <a class="dropdown-item" href="user_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
-                    <?php endif; ?>
                         <li>
-                            <a class="dropdown-item" href="perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
+                            <a class="dropdown-item" href="user_servicos.php"><i class="bi bi-house-gear-fill"></i> Serviços</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="configuracoes.php"><i class="bi bi-gear-fill"></i> Configurações</a>
+                            <a class="dropdown-item" href="user_perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
+                        </li>
+                    <?php endif; ?>
+                        <li>
+                            <a class="dropdown-item" href="../configuracoes.php"><i class="bi bi-gear-fill"></i> Configurações</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

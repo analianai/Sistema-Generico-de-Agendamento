@@ -127,55 +127,53 @@
     <!-- Depoimentos Section -->
     <section id="comentarios" class="container-fluid py-5">
         <div class="container">
-        <h2>Depoimentos</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="card-text">"A experiência foi maravilhosa! Ótimo atendimento e ambiente acolhedor."</p>
-                        <h5 class="card-title">- Ana Maria</h5>
+            <div class="d-flex justify-content-between mb-3">
+                <h2>Depoimentos</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"A experiência foi maravilhosa! Ótimo atendimento e ambiente acolhedor."</p>
+                            <h5 class="card-title">- Ana Maria</h5>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
+                            <h5 class="card-title">- João Silva</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                        <h5 class="card-title">- João Silva</h5>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
+                            <h5 class="card-title">- João Silva</h5>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
+                            <h5 class="card-title">- João Silva</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
+                            <h5 class="card-title">- João Silva</h5>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
+                            <h5 class="card-title">- João Silva</h5>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                        <h5 class="card-title">- João Silva</h5>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                        <h5 class="card-title">- João Silva</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Deixe seu comentário</h5>
-                        <form>
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nomeDepoimento" placeholder="Digite seu nome">
-                            </div>
-                            <div class="mb-3">
-                                <label for="comentario" class="form-label">Comentário</label>
-                                <textarea class="form-control" id="comentario" rows="3" placeholder="Escreva seu comentário"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-success w-100">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </section>
 

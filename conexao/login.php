@@ -44,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Redireciona com base no nível de acesso
             if ($nivel_acesso == 1) {
-                header("Location: ../areaSegura/admin_dashboard.php");
+                header("Location: ../areaSegura/admin/admin_dashboard.php");
             } else if ($nivel_acesso == 0) {
-                header("Location: ../areaSegura/user_dashboard.php");
+                header("Location: ../areaSegura/user/user_dashboard.php");
             }
             exit;
         } else {

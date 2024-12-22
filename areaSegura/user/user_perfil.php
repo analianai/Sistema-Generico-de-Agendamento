@@ -55,25 +55,45 @@ $mysqli->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+        <style>
+        .tamanho{
+            width: 15rem;
+            height: 15rem;
+            font-size: 2em;
+        }
+    </style>
 </head>
 <body>
     <!-- Inclui o menu seguro -->
-    <?php include '../componentes/menuSeguro.php'; ?>
+    <?php include '../../componentes/menuSeguro.php'; ?>
     <section class="container">
-        <div class="mt-5">
+        <div class="mt-5 d-flex justify-content-between">
             <h3 class="pt-5"><i class="bi bi-person-check-fill"></i> Meu Perfil</h3>
-            <hr>
+            <a href="user_dashboard.php" type="button" class="btn-close pt-5 mt-4" aria-label="Close"></a>
         </div>
+        <hr>
     </section>
     <div class="container">
-    
-        <p><strong>Nome:</strong> <?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></p>
-        <p><strong>Celular (WhatsApp):</strong> <?php echo htmlspecialchars($user['celular']); ?></p>
-        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($user['endereco']); ?></p>
+        <div class="row">
+            <div class="col">
+                <p><strong>Nome:</strong> <?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></p>
+                <p><strong>Celular (WhatsApp):</strong> <?php echo htmlspecialchars($user['celular']); ?></p>
+                <p><strong>Endereço:</strong> <?php echo htmlspecialchars($user['endereco']); ?></p>
+        
+            </div>
+        </div>
+        <div class="container text-center mt-5 mb-5 ">
+            <div class="row justify-content-end">
+                <div class="col col-sm-4">
+                    <button type="button" class="btn btn-outline-primary mb-3 tamanho" data-bs-toggle="modal" data-bs-target="#depoimentosModal"><i class="bi bi-key-fill"></i><br>Trocar Senha</button>
+                </div>
+                <div class="col col-sm-4">
+                    <button type="button" class="btn btn-outline-danger mb-3 tamanho"><i class="bi bi-person-gear"></i><br>Atualizar Perfil</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="../assets/js/script.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include '../../componentes/footerSeguro.php'; ?>
 </body>
 </html>
