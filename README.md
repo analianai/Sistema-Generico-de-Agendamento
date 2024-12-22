@@ -49,28 +49,30 @@ Este projeto é um site responsivo para um Salão de Beleza, criado utilizando o
 ## Estrutura de Arquivos
 ```
 /
-|-- index.php        # Página inicial
-|-- sobre.php        # Sobre nós
-|-- midia.php        # Página de mídia
-|-- servicos.php     # Página de serviços
-|-- faq.php          # Contato e duvidas
-|-- sing_in.php      # Página de login
-|-- sing_in.php      # Página de Cadastro
+|-- index.php         # Página inicial
+|-- sobre.php         # Sobre nós
+|-- midia.php         # Página de mídia
+|-- servicos.php      # Página de serviços
+|-- faq.php           # Contato e duvidas
+|-- sing_in.php       # Página de login
+|-- sing_in.php       # Página de Cadastro
 |-- /assets           # Diretório de midias
-|-- -------/css       # Diretório de arquivos CSS (opcional)
-|-- -------/img       # Diretório de imagens
-|-- -------/JS        # Diretório de FavaScript
+|-- ----/css          # Diretório de arquivos CSS (opcional)
+|-- ----/img          # Diretório de imagens
+|-- ----/JS           # Diretório de FavaScript
 |-- /Area Segura      # Diretório dp 
-|-- -----------       # admin_dashboard.php
-|-- -----------       # user_dashboard.php
+|-- ----admin_dashboard.php
+|-- ----admin_relatorio.php
+|-- ----admin_servico.php
+|-- ----user_dashboard.php
 |-- /componentes      # Diretório dos componentes
-|-- -----------       # menu.php
-|-- -----------       # menuSeguro.php
-|-- -----------       # footer.php
-|-- ---/conexao       # Diretório dos Conexão com BD
-|-- -----------       # Login.php
-|-- -----------       # Logout.php
-|-- -----------       # Resister.php
+|-- ----menu.php
+|-- ----menuSeguro.php
+|-- ----footer.php
+|-- /conexao          # Diretório dos Conexão com BD
+|-- ----Login.php
+|-- ----Logout.php
+|-- ----Resister.php
 ```
 
 ## Contribuições
