@@ -3,30 +3,30 @@
 Este projeto é um site responsivo para um Salão de Beleza, criado utilizando o framework Bootstrap. O objetivo é fornecer informações claras e acessíveis para clientes, incluindo serviços, mídia, FAQs e contato.
 
 ## Tecnologias Utilizadas
-- **HTML5**: Estrutura do site.
+- **php**: Estrutura do site.
 - **CSS3**: Estilização adicional (quando necessário).
 - **Bootstrap 5**: Framework utilizado para design responsivo e componentes pré-prontos.
 - **JavaScript**: Para interatividade (modais e outros componentes do Bootstrap).
 
 ## Páginas
 
-### 1. **Início (index.html)**
+### 1. **Início (index.php)**
 - Contém um carrossel responsivo que apresenta o salão e seus destaques.
 - Seções principais como Sobre, Serviços, e Contato são resumidas.
 
-### 2. **Sobre (sobre.html)**
+### 2. **Sobre (sobre.php)**
 - Apresenta a história e os valores do salão (Missão, Visão e Valores).
 - Inclui depoimentos de clientes satisfeitos.
 
-### 3. **Mídia (midia.html)**
+### 3. **Mídia (midia.php)**
 - Exibe fotos e vídeos organizados em seções separadas.
 - Cada item está em um card responsivo, com botão para mais detalhes.
 
-### 4. **Serviços (servicos.html)**
+### 4. **Serviços (servicos.php)**
 - Lista os serviços oferecidos pelo salão, como corte de cabelo, coloração, manicure, entre outros.
 - Cada serviço possui um botão que abre um modal com mais detalhes.
 
-### 5. **FAQ (faq.html)**
+### 5. **FAQ (faq.php)**
 - Inclui informações de contato organizadas em colunas responsivas.
 - Um Accordion de perguntas frequentes (FAQ) sobre o funcionamento do salão.
 
@@ -49,14 +49,28 @@ Este projeto é um site responsivo para um Salão de Beleza, criado utilizando o
 ## Estrutura de Arquivos
 ```
 /
-|-- index.html        # Página inicial
-|-- sobre.html        # Sobre nós
-|-- midia.html        # Página de mídia
-|-- servicos.html     # Página de serviços
-|-- faq.html          # Perguntas Frequentes
-|-- /assets           # Diretório de imagens
+|-- index.php        # Página inicial
+|-- sobre.php        # Sobre nós
+|-- midia.php        # Página de mídia
+|-- servicos.php     # Página de serviços
+|-- faq.php          # Contato e duvidas
+|-- sing_in.php      # Página de login
+|-- sing_in.php      # Página de Cadastro
+|-- /assets           # Diretório de midias
 |-- -------/css       # Diretório de arquivos CSS (opcional)
 |-- -------/img       # Diretório de imagens
+|-- -------/JS        # Diretório de FavaScript
+|-- /Area Segura      # Diretório dp 
+|-- -----------       # admin_dashboard.php
+|-- -----------       # user_dashboard.php
+|-- /componentes      # Diretório dos componentes
+|-- -----------       # menu.php
+|-- -----------       # menuSeguro.php
+|-- -----------       # footer.php
+|-- ---/conexao       # Diretório dos Conexão com BD
+|-- -----------       # Login.php
+|-- -----------       # Logout.php
+|-- -----------       # Resister.php
 ```
 
 ## Contribuições

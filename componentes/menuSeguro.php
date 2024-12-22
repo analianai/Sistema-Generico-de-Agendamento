@@ -26,30 +26,30 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                             <a class="dropdown-item" href="admin_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="gerenciar_usuarios.php"><i class="bi bi-person-fill-gear"></i> Gerenciar Usuários</a>
+                            <a class="dropdown-item" href="admin_gerenciar_usuarios.php"><i class="bi bi-person-fill-gear"></i> Gerenciar Usuários</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="servicos.php"><i class="bi bi-house-gear-fill"></i> Serviços</a>
+                            <a class="dropdown-item" href="admin_servicos.php"><i class="bi bi-house-gear-fill"></i> Serviços</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="relatorio.php"><i class="bi bi-bar-chart-fill"></i> Relatórios</a>
+                            <a class="dropdown-item" href="admin_relatorio.php"><i class="bi bi-bar-chart-fill"></i> Relatórios</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="agendamentoAdmin.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
+                            <a class="dropdown-item" href="admin_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
                     <?php elseif ($nivel_acesso == USER): ?>
                         <li>
                             <a class="dropdown-item" href="user_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="agendamentoUser.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
+                            <a class="dropdown-item" href="user_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
                     <?php endif; ?>
                         <li>
                             <a class="dropdown-item" href="perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#"><i class="bi bi-gear-fill"></i> Configurações</a>
+                            <a class="dropdown-item" href="configuracoes.php"><i class="bi bi-gear-fill"></i> Configurações</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
