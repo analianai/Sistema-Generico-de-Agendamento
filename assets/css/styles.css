@@ -43,3 +43,18 @@
 #faqMeio{
     background-color: rgb(228, 227, 227) !important;
 }
+.ver{
+       background-color: #c31616 !important;
+}
+.password-strength {
+    margin-top: 5px;
+}
+.strength-weak {
+    color: red;
+}
+.strength-medium {
+    color: orange;
+}
+.strength-strong {
+    color: green;
+}

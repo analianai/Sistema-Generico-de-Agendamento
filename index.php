@@ -56,7 +56,7 @@
     </div>
     
     <!-- Sobre Section -->
-    <section id="sobre" class="container py-5">
+    <section id="sobreNos" class="container py-5">
         <div class="d-flex justify-content-between mb-3">
             <h2>Sobre Nós</h2>
             <a href="sobre.php" class="text-success text-decoration-none">Saiba mais</a>
@@ -86,7 +86,7 @@
     </section>
 
     <!-- Mídia Section -->
-    <section id="midia" class="container py-5">
+    <section id="midiaIndex" class="container py-5">
         <div class="d-flex justify-content-between mb-3">
             <h2>Mídia</h2>
             <a href="midia.html" class="text-success text-decoration-none">Saiba Mais</a>
@@ -164,7 +164,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+                                <input type="text" class="form-control" id="nomeDepoimento" placeholder="Digite seu nome">
                             </div>
                             <div class="mb-3">
                                 <label for="comentario" class="form-label">Comentário</label>
@@ -228,6 +228,5 @@
     </section>
     <!-- Footer -->
     <?php include './componentes/footer.php'; ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

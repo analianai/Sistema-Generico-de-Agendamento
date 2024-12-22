@@ -25,34 +25,32 @@
     </section>
 
     <!-- Sobre Section -->
-    <section class="py-5">
+    <section class="py-5" id="sobreMeio">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h2>Quem Somos</h2>
                     <p>O Salão de Beleza nasceu com a missão de oferecer experiências únicas de cuidado e transformação. Com anos de experiência no mercado, nossa equipe é formada pelos melhores profissionais, sempre prontos para valorizar a sua beleza natural.</p>
                     <p>Nosso compromisso é proporcionar um ambiente acolhedor e serviços de altísima qualidade, utilizando produtos das melhores marcas do mercado.</p>
                 </div>
-                <div class="col-md-6">
-                    <img src="./assets/img/sobre.jpg" class="img-fluid rounded" alt="Sobre Nós">
-                </div>
+              
             </div>
         </div>
     </section>
 
     <!-- Missão, Visão e Valores -->
-    <section id="sobreMeio" class="py-5">
+    <section  class="py-5">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-md-4">
+            <div class="row">
+            <div class="col-md-6">
+                    <img src="./assets/img/sobre.jpg" class="img-fluid rounded" alt="Sobre Nós">
+                </div>
+                <div class="col-md-6">
                     <h3>Missão</h3>
                     <p>Promover bem-estar e autoestima através de serviços de excelência no ramo da beleza.</p>
-                </div>
-                <div class="col-md-4">
                     <h3>Visão</h3>
                     <p>Ser reconhecido como referência no mercado de beleza pela qualidade e inovação.</p>
-                </div>
-                <div class="col-md-4">
+
                     <h3>Valores</h3>
                     <p>Compromisso, excelência, respeito e dedicação a cada cliente.</p>
                 </div>
@@ -96,7 +94,5 @@
     <!-- Footer -->
     <?php include './componentes/footer.php'; ?> 
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
