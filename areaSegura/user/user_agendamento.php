@@ -1,12 +1,5 @@
-<?php
-session_start();
+<?php include '../../componentes/user_auth.php'; ?>
 
-if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
-    header("Location: ../sing_in.php?error=Acesso negado.");
-    exit;
-}
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

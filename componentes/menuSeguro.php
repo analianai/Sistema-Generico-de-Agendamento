@@ -58,7 +58,7 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="../conexao/logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
+                            <a class="dropdown-item" href="../../conexao/logout.php"><i class="bi bi-box-arrow-right"></i> Sair</a>
                         </li>
                     </ul>
                 </div>
