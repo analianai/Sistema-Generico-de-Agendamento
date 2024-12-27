@@ -66,6 +66,7 @@ $mysqli->close();
 <body>
     <!-- Inclui o menu seguro -->
     <?php include '../../componentes/menuSeguro.php'; ?>
+    
     <section class="container">
         <div class="mt-5 d-flex justify-content-between">
             <h3 class="pt-5"><i class="bi bi-person-check-fill"></i> Meu Perfil</h3>

@@ -51,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Senha incorreta
-            header("Location: ../../sing_in.php?error=Senha incorreta");
+            header("Location: ../sing_in.php?error=Senha incorreta");
             exit;
         }
     } else {
         // Usuário não encontrado
-        header("Location: ../../sing_in.php?error=Usuário não encontrado");
+        header("Location: ../sing_in.php?error=Usuário não encontrado");
         exit;
     }
 
