@@ -74,22 +74,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 // Recuperar serviços
 $servicos = $mysqli->query("SELECT * FROM servicos")->fetch_all(MYSQLI_ASSOC);
 
+
 // Lógica de categorias
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['nova_categoria']) && !empty($_POST['nova_categoria'])) {
-        $nova_categoria = $_POST['nova_categoria'];
+        $nova_categoria = trim($_POST['nova_categoria']); // Remover espaços extras
 
-        // Inserir a nova categoria no banco de dados
-        $stmt = $mysqli->prepare("INSERT INTO categorias (nome) VALUES (?)");
+        // Verificar se a categoria já existe
+        $stmt = $mysqli->prepare("SELECT COUNT(*) FROM categorias WHERE nome = ?");
         $stmt->bind_param('s', $nova_categoria);
         $stmt->execute();
+        $stmt->bind_result($count);
+        $stmt->fetch();
+        $stmt->close();
 
-        // Define a mensagem de sucesso na sessão
-        $_SESSION['mensagem_sucesso'] = 'Categoria criada com sucesso!';
+        if ($count > 0) {
+            // Categoria já existe
+            $_SESSION['mensagem_erro'] = 'A categoria já está cadastrada!';
+        } else {
+            // Inserir a nova categoria no banco de dados
+            $stmt = $mysqli->prepare("INSERT INTO categorias (nome) VALUES (?)");
+            $stmt->bind_param('s', $nova_categoria);
+            $stmt->execute();
+            $stmt->close();
+
+            // Define a mensagem de sucesso na sessão
+            $_SESSION['mensagem_sucesso'] = 'Categoria criada com sucesso!';
+        }
+
+        // Redirecionar para evitar reenvio do formulário
         header("Location: admin_servicos.php");
         exit;
     }
 }
+
 
 // Recuperar categorias existentes
 $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetch_all(MYSQLI_ASSOC);
@@ -115,7 +133,7 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
         .rosa{
             background-color: rgb(251, 246, 246);
         }
-        #mensagem-sucesso {
+        #mensagem-sucesso, #mensagem-erro {
             position: fixed; /* Fixar a mensagem no topo da página */
             top: 20px; /* Distância do topo */
             left: 50%; /* Centraliza horizontalmente */
@@ -128,13 +146,20 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
     </style>
 </head>
 <body>
+    <!-- Mensagem de erro -->
+    <?php if (isset($_SESSION['mensagem_erro'])): ?>
+        <div id="mensagem-erro" class="alert alert-danger mt-4" role="alert">
+            <?= $_SESSION['mensagem_erro'] ?>
+        </div>
+        <?php unset($_SESSION['mensagem_erro']); ?>
+    <?php endif; ?>
     <!-- Mensagem de sucesso -->
-        <?php if (isset($_SESSION['mensagem_sucesso'])): ?>
-            <div id="mensagem-sucesso" class="alert alert-success text-center" role="alert">
-                <?= $_SESSION['mensagem_sucesso'] ?>
-            </div>
-            <?php unset($_SESSION['mensagem_sucesso']); ?>
-        <?php endif; ?>
+    <?php if (isset($_SESSION['mensagem_sucesso'])): ?>
+        <div id="mensagem-sucesso" class="alert alert-success mt-4" role="alert">
+            <?= $_SESSION['mensagem_sucesso'] ?>
+        </div>
+        <?php unset($_SESSION['mensagem_sucesso']); ?>
+    <?php endif; ?>
 
 
     <!-- menu -->
