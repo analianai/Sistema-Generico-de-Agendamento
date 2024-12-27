@@ -6,16 +6,14 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
     exit;
 }
 
-
-
-$mysqli = new mysqli("localhost", "root", "", "salao"); // Certifique-se de ter uma conexão com o BD
+$mysqli = new mysqli("localhost", "root", "", "salao");
 
 // Lógica de inserção de serviços
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
 
     if ($action === 'add') {
-        $codigo_servico = $_POST['codigo']; // Código inserido pelo usuário
+        $codigo_servico = $_POST['codigo'];
         $titulo = $_POST['titulo'];
         $descricao = $_POST['descricao'];
         $observacao = $_POST['observacao'];
@@ -76,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 // Recuperar serviços
 $servicos = $mysqli->query("SELECT * FROM servicos")->fetch_all(MYSQLI_ASSOC);
 
+// Lógica de categorias
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['nova_categoria']) && !empty($_POST['nova_categoria'])) {
         $nova_categoria = $_POST['nova_categoria'];
@@ -85,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('s', $nova_categoria);
         $stmt->execute();
 
-        // Adiciona a mensagem de sucesso na sessão
+        // Define a mensagem de sucesso na sessão
         $_SESSION['mensagem_sucesso'] = 'Categoria criada com sucesso!';
         header("Location: admin_servicos.php");
         exit;
@@ -116,20 +115,30 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
         .rosa{
             background-color: rgb(251, 246, 246);
         }
+        #mensagem-sucesso {
+            position: fixed; /* Fixar a mensagem no topo da página */
+            top: 20px; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição centralizada */
+            z-index: 1050; /* Garante que a mensagem esteja acima de outros elementos */
+            width: auto; /* Ajusta largura */
+            max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
+        }
+
     </style>
 </head>
 <body>
-    <?php if (isset($_GET['categoria_criada']) && $_GET['categoria_criada'] === 'true'): ?>
-        <div id="mensagem-sucesso" class="alert alert-success mt-4" role="alert">
-            Categoria criada com sucesso!
-        </div>
-    <?php endif; ?>
+    <!-- Mensagem de sucesso -->
+        <?php if (isset($_SESSION['mensagem_sucesso'])): ?>
+            <div id="mensagem-sucesso" class="alert alert-success text-center" role="alert">
+                <?= $_SESSION['mensagem_sucesso'] ?>
+            </div>
+            <?php unset($_SESSION['mensagem_sucesso']); ?>
+        <?php endif; ?>
+
 
     <!-- menu -->
     <?php include '../../componentes/menuSeguro.php'; ?>
-
-
-
 
     <section class="container">
         <div class="mt-5 d-flex justify-content-between">

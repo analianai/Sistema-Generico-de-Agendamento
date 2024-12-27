@@ -4,21 +4,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="NovaCategoriaModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="NovaCategoriaModalLabel">Nova Categoria</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form action="" method="POST">
               <div class="mb-3">
-                  <label for="nova_categoria" class="form-label">Criar Nova Categoria:</label>
                   <input type="text" class="form-control" id="nova_categoria" name="nova_categoria" placeholder="Insira o nome da nova categoria">
               </div>
-              <button type="submit" class="btn btn-primary mb-3">Adicionar Categoria</button>
+              <div class="mb-3 text-center">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                <button type="submit" class="btn btn-outline-success pe-3"><i class="bi bi-floppy"><i class="bi bi-backspace-reverse-fill"></i> Criar Categoria</button>
+              </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
           <?php if (isset($_GET['categoria_criada']) && $_GET['categoria_criada'] === 'true'): ?>
           <div class="alert alert-success mt-4" role="alert">
@@ -70,8 +68,8 @@
                           <textarea class="form-control" name="observacao" rows="2" placeholder="Insira sua Observação"></textarea>
                       </div>
                       <div class="col-md-12 text-center">
-                          <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">Fechar</button>
-                          <button type="submit" class="btn btn-success">Adicionar</button>  
+                          <button type="button" class="btn btn-outline-danger me-1" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                          <button type="submit" class="btn btn-outline-success"><i class="bi bi-backspace-reverse-fill"></i> Criar Serviço</button>  
                       </div>
                   </form>
               </div>
@@ -122,7 +120,7 @@
                           <textarea class="form-control" name="observacao" rows="2"> <?= $servico['observacao'] ?></textarea>
                       </div>
                       <div class="col-md-12 text-center mt-3 mb-3">
-                          <button type="submit" class="btn btn-outline-success me-3"><i class="bi bi-floppy2-fill"></i> Salvar</button>
+                          <button type="submit" class="btn btn-outline-success me-3"><i class="bi bi-arrow-repeat"></i> Salvar</button>
                           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
                       </div>
                   </form>
@@ -138,7 +136,7 @@
               <div class="modal-body rosa rounded text-center">
                   <p class="text-center fs-5">Deseja excluir o serviço <strong><?= $servico['titulo'] ?></strong>?</p>
                   *Ao excluir este serviço ele será removido permanentemente.
-                  <button type="button" class="btn btn-outline-success mt-4 me-3" data-bs-dismiss="modal"><i class="bi bi-backspace"></i>Voltar</button>
+                  <button type="button" class="btn btn-outline-success mt-4 me-3" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
                   <form action="" method="POST" style="display:inline;">
                       <input type="hidden" name="action" value="delete">
                       <input type="hidden" name="id" value="<?= $servico['id'] ?>">
