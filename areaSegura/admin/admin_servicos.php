@@ -19,21 +19,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $observacao = $_POST['observacao'];
         $duracao = $_POST['duracao'];
         $valor = $_POST['valor'];
-
-        // Upload da imagem
-        $imagem = '';
-        if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-            $uploadDir = '../../assets/uploads/';
-            $imagem = $uploadDir . basename($_FILES['imagem']['name']);
-            move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
-        }
-
-        // Inserir no BD
-        $stmt = $mysqli->prepare("INSERT INTO servicos (codigo, imagem, titulo, descricao, observacao, duracao, valor) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('sssssid', $codigo_servico, $imagem, $titulo, $descricao, $observacao, $duracao, $valor);
+        $categoria_id = $_POST['categoria_id'];
+    
+        // Verificar se a categoria é válida
+        $stmt = $mysqli->prepare("SELECT COUNT(*) FROM categorias WHERE id = ?");
+        $stmt->bind_param('i', $categoria_id);
         $stmt->execute();
+        $stmt->bind_result($categoria_valida);
+        $stmt->fetch();
+        $stmt->close();
+    
+        if ($categoria_valida == 0) {
+            $_SESSION['mensagem_erro'] = 'A categoria selecionada não é válida!';
+        } else {
+            // Upload da imagem
+            $imagem = '';
+            if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
+                $uploadDir = '../../assets/uploads/';
+                $imagem = $uploadDir . basename($_FILES['imagem']['name']);
+                move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
+            }
+    
+            // Inserir no BD
+            $stmt = $mysqli->prepare("INSERT INTO servicos (codigo, imagem, titulo, descricao, observacao, duracao, valor, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param('sssssidi', $codigo_servico, $imagem, $titulo, $descricao, $observacao, $duracao, $valor, $categoria_id);
+            $stmt->execute();
+    
+            $_SESSION['mensagem_sucesso'] = 'Serviço cadastrado com sucesso!';
+        }
+        header("Location: admin_servicos.php");
+        exit;
     }
-
+    
     if ($action === 'update') {
         $id = $_POST['id'];
         $codigo_servico = $_POST['codigo'];
@@ -72,8 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // Recuperar serviços
-$servicos = $mysqli->query("SELECT * FROM servicos")->fetch_all(MYSQLI_ASSOC);
-
+$servicos = $mysqli->query("SELECT s.*, c.nome AS categoria_nome FROM servicos s LEFT JOIN categorias c ON s.categoria_id = c.id")->fetch_all(MYSQLI_ASSOC);
 
 // Lógica de categorias
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -107,7 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
 
 // Recuperar categorias existentes
 $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetch_all(MYSQLI_ASSOC);
@@ -161,7 +176,6 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
         <?php unset($_SESSION['mensagem_sucesso']); ?>
     <?php endif; ?>
 
-
     <!-- menu -->
     <?php include '../../componentes/menuSeguro.php'; ?>
 
@@ -171,7 +185,7 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
             <a href="admin_dashboard.php" type="button" class="btn-close pt-5 mt-4" aria-label="Close"></a>
         </div>
         <hr>
-        <!-- Button NOVO Serviço -->
+        <!-- Button NOVA categoria e Serviço -->
          <div class="row">
             <div class="col-md-6">
                 <button type="button" class="btn text-primary mb-4" data-bs-toggle="modal" data-bs-target="#NovaCategoriaModal">
@@ -187,10 +201,96 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
                 </button>
             </div>
         </div>
-        
+        <!-- Nova Categoria Modal -->
+        <div class="modal fade" id="NovaCategoriaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NovaCategoriaModalLabel">Nova Categoria</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form action="" method="POST">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="nova_categoria" name="nova_categoria" placeholder="Insira o nome da nova categoria">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                        <button type="submit" class="btn btn-outline-success pe-3"><i class="bi bi-floppy"><i class="bi bi-backspace-reverse-fill"></i> Criar Categoria</button>
+                    </div>
+                </form>
+                </div>
+                <?php if (isset($_GET['categoria_criada']) && $_GET['categoria_criada'] === 'true'): ?>
+                <div class="alert alert-success mt-4" role="alert">
+                    Categoria criada com sucesso!
+                </div>
+                <?php endif; ?>
+            </div>
+            </div>
+        </div>
+          <!-- Modal NOVO Serviço -->
+        <div class="modal fade" id="NovoServico" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title w-100 fs-5" id="NovoServicoLabel">Novo Serviço</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <form action="" method="POST" enctype="multipart/form-data" class="row g-3">
+                            <input type="hidden" name="action" value="add">
+                            <div class="col-md-12">
+                                <label for="titulo" class="form-label ">Título:</label>
+                                <input type="text" class="form-control" name="titulo" placeholder="Título" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="duracao" class="form-label">Duração (minutos):</label>
+                                <input type="number" class="form-control" name="duracao" placeholder="0" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="valor" class="form-label">Valor (R$):</label>
+                                <input type="number" step="0.01" class="form-control" name="valor" placeholder="0.00" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="codigo" class="form-label">Código do Serviço:</label>
+                                <input type="text" class="form-control" name="codigo" placeholder="Ex: SRV123" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="categoria" class="form-label">Categoria:</label>
+                                <select name="categoria_id" id="categoria" class="form-select" required>
+                                    <option value="">Selecione uma categoria</option>
+                                    <?php foreach ($categorias as $categoria): ?>
+                                        <option value="<?= $categoria['id'] ?>"><?= htmlspecialchars($categoria['nome']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="imagem" class="form-label">Imagem:</label>
+                                <input type="file" class="form-control" name="imagem" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="descricao" class="form-label">Descrição:</label>
+                                <textarea class="form-control" name="descricao" rows="2" placeholder="Insira a Descrição" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="observacao" class="form-label">Observação:</label>
+                                <textarea class="form-control" name="observacao" rows="2" placeholder="Insira sua Observação"></textarea>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-outline-danger me-1" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                <button type="submit" class="btn btn-outline-success"><i class="bi bi-backspace-reverse-fill"></i> Criar Serviço</button>  
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
     <section id="admin_servicos" class="container">
- 
+    <h4 class="card-text"><i class="bi bi-bookmark-plus"></i> Categoria: <?= isset($servico['categoria_nome']) ? $servico['categoria_nome'] : 'Sem categoria' ?></h4>
+
+    <hr>
     <div class="row">
         <?php foreach ($servicos as $servico): ?>
             <div class="col-md-4">
@@ -229,7 +329,7 @@ $categorias = $mysqli->query("SELECT * FROM categorias ORDER BY nome ASC")->fetc
 
     <?php include '../../componentes/footerSeguro.php'; ?>
 
-<script>
+    <script>
     // Ocultar a mensagem de sucesso após 3 segundos
     document.addEventListener('DOMContentLoaded', function () {
         const mensagemSucesso = document.getElementById('mensagem-sucesso');
