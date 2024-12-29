@@ -383,28 +383,5 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
 
     <!--Footer rodapé-->
     <?php include '../../componentes/footerSeguro.php'; ?>
-
-    <script>
-        // Ocultar a mensagem de sucesso após 3 segundos
-        document.addEventListener('DOMContentLoaded', function () {
-            const mensagemSucesso = document.getElementById('mensagem-sucesso');
-            if (mensagemSucesso) {
-                setTimeout(() => {
-                    mensagemSucesso.style.transition = 'opacity 0.5s';
-                    mensagemSucesso.style.opacity = '0';
-                    setTimeout(() => mensagemSucesso.remove(), 500); // Remove completamente o elemento
-                }, 3000); // 3000 ms = 3 segundos
-            }
-        });
-
-        // Remover parâmetros da URL após carregar a página
-        document.addEventListener('DOMContentLoaded', function () {
-            const url = new URL(window.location.href);
-            if (url.searchParams.has('categoria_criada')) {
-                url.searchParams.delete('categoria_criada');
-                window.history.replaceState({}, document.title, url.toString());
-            }
-        });
-    </script>
 </body>
 </html>

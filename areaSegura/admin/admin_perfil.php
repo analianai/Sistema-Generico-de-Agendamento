@@ -404,7 +404,7 @@ $mysqli->close();
     </section>
     <!-- Inclui o footer -->
     <?php include '../../componentes/footerSeguro.php'; ?>
-    <!--Script do Perfil-->
+    <!--Script das paginas seguras-->
     <script src="../../assets/js/scriptSeguro.js"></script>
 </body>
 </html>

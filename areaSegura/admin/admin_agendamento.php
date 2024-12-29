@@ -20,11 +20,11 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
 </head>
 <body>
     <!-- memu -->
-    <?php include '../componentes/menuSeguro.php'; ?>
+    <?php include '../../componentes/menuSeguro.php'; ?>
 
     <section class="container">
         <div class="mt-5">
-            <h3 class="pt-5"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</h3>
+            <h3 class="pt-5"><i class="bi bi-person-lines-fill"></i> Agendamento</h3>
             <hr>
         </div>
     </section>

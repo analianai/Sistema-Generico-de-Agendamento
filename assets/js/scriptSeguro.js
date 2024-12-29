@@ -41,18 +41,7 @@ document.getElementById('btnSalvarAlteracoes').addEventListener('click', functio
     document.getElementById('formTrocarSenha').submit();
 });
 
-// Ocultar a mensagem de sucesso após 3 segundos
-document.addEventListener('DOMContentLoaded', function () {
-    const mensagemSucesso = document.getElementById('mensagem-sucesso');
-    if (mensagemSucesso) {
-        setTimeout(() => {
-            mensagemSucesso.style.transition = 'opacity 0.5s';
-            mensagemSucesso.style.opacity = '0';
-            setTimeout(() => mensagemSucesso.remove(), 500); // Remove completamente o elemento
-        }, 2000); // 2000 ms = 2 segundos
-    }
-});
-
+ 
 // Remover parâmetros da URL após carregar a página
 document.addEventListener('DOMContentLoaded', function () {
     const url = new URL(window.location.href);

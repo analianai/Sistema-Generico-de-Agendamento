@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal depoimentos-->
         <div class="modal fade modal-xl" id="depoimentosModal" tabindex="-1" aria-labelledby="depoimentosModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -117,11 +117,11 @@
             </div>
         </div>        
     </section>
-
+    <!-- Historico de Agendamento-->
     <section id="Hitorico">
         <div class="container mt-3 mb-5">
             <div class="mt-2 mb-4">
-                <h4><i class="bi bi-journal-check"></i> Historico de Agendamento</h4>
+                <h4><i class="bi bi-journal-check"></i> Histórico de Agendamento</h4>
             </div>
             <div class="container-sm">
                 <div class="table-responsive">
@@ -130,7 +130,7 @@
                         <thead class="table-primary text-center">
                             <th scope="col">#</th> 
                             <th scope="col">Nome</th>
-                            <th scope="col">Horario</th>
+                            <th scope="col">Horário</th>
                             <th scope="col">Status</th>
                         </tr>
                         </thead>

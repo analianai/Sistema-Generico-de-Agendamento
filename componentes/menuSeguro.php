@@ -8,12 +8,14 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
     ?>
     <section container-fluid>
         <nav class="navbar navbar-expand-lg fixed-top bg-success bg-gradient">
-            <div class="container-fluid d-flex justify-content-between">
-                <a class="navbar-brand text-white" href="#">
-                    Salão de Beleza
-                </a>
-                <div class="text-white">
-                    <?php echo "Bem-vindo, " . htmlspecialchars($_SESSION['nome']);?>
+            <div class="container-fluid">
+                <div class="d-flex justify-content-start">
+                    <a class="navbar-brand text-white" href="#">
+                        Salão de Beleza
+                    </a>
+                </div>
+                <div class="text-white d-flex justify-content-end">
+                    <?php echo  htmlspecialchars($_SESSION['nome']);?>
                 </div>
                 <div class="dropdown">
                     <button class="nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,21 +28,22 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                             <a class="dropdown-item" href="admin_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="admin_gerenciar_usuarios.php"><i class="bi bi-person-fill-gear"></i> Gerenciar Usuários</a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="admin_servicos.php"><i class="bi bi-house-gear-fill"></i> Serviços</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="admin_relatorio.php"><i class="bi bi-bar-chart-fill"></i> Relatórios</a>
+                            <a class="dropdown-item" href="admin_relatorio.php"><i class="bi bi-graph-up-arrow"></i> Relatórios</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="admin_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
+                            <a class="dropdown-item" href="admin_gerenciar_usuarios.php"><i class="bi bi-person-fill-gear"></i> Gerenciar Usuários</a>
                         </li>
+                        <li>
+                            <a class="dropdown-item" href="admin_agendamento.php"><i class="bi bi-person-lines-fill"></i> Agendamento</a>
+                        </li>
+                        <li>
                         <li>
                             <a class="dropdown-item" href="admin_perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
                         </li>
-                    <?php elseif ($nivel_acesso == USER): ?>
+                        <?php elseif ($nivel_acesso == USER): ?>
                         <li>
                             <a class="dropdown-item" href="user_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
@@ -51,9 +54,7 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                             <a class="dropdown-item" href="user_perfil.php"><i class="bi bi-person-check-fill"></i> Meu Perfil</a>
                         </li>
                     <?php endif; ?>
-                        <li>
-                            <a class="dropdown-item" href="../configuracoes.php"><i class="bi bi-gear-fill"></i> Configurações</a>
-                        </li>
+                        
                         <li>
                             <hr class="dropdown-divider">
                         </li>

@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
         header("Location: admin_servicos.php");
         exit;
+    } else {
+        $_SESSION['mensagem_erro'] = 'Erro ao cadastrar o serviço!';
     }
     
     if ($action === 'update') {
@@ -67,6 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                         WHERE id = ?");
         $stmt->bind_param('sssssidii', $codigo_servico, $imagem, $titulo, $descricao, $observacao, $duracao, $valor, $categoria_id, $id);
         $stmt->execute();
+
+        $_SESSION['mensagem_sucesso'] = 'Serviço atualizado com sucesso!';
+    } else {
+        $_SESSION['mensagem_erro'] = 'Erro ao atualizar o serviço!';
     }
     
     if ($action === 'delete') {
@@ -76,6 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $stmt = $mysqli->prepare("DELETE FROM servicos WHERE id = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
+
+        $_SESSION['mensagem_sucesso'] = 'Serviço Deletado com sucesso!';
+    } else{
+        $_SESSION['mensagem_erro'] = 'Erro ao deletar o serviço!';
     }
 
     // Redirecionar para evitar reenvio do formulário
@@ -138,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
 
             if ($servicosCount > 0) {
-                $_SESSION['mensagem_erro'] = "Não é possível excluir a categoria. Existem $servicosCount serviços associados.";
+                $_SESSION['mensagem_erro'] = "Não é possível excluir a categoria. Existem $servicosCount serviços associados. Exclua ou atualize o serviço para outra categoria antes de excluir";
             } else {
                 // Executar exclusão
                 $deleteQuery = "DELETE FROM categorias WHERE cat_id = ?";
