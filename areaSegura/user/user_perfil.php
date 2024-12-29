@@ -55,7 +55,7 @@ $mysqli->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-        <style>
+    <style>
         .tamanho{
             width: 15rem;
             height: 15rem;
