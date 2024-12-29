@@ -221,9 +221,9 @@ $mysqli->close();
                     <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['estado']); ?></p>
                 </div>
             </div>
-            <div class="col-md-3 d-flex justify-content-end">
+            <div class="col-md-4 d-flex justify-content-end">
                 <div class="border border-2 border rounded p-4">
-                    <img src="../../assets/uploads/20241001_115705.jpg" class="img-fluid rounded" alt="Imagem de perfil">  
+                    <img src="../../assets/uploads/20241001_115705.jpg" width="300" class="img-fluid rounded" alt="Imagem de perfil">  
                 </div>    
             </div>
         </div>
@@ -404,7 +404,7 @@ $mysqli->close();
     </section>
     <!-- Inclui o footer -->
     <?php include '../../componentes/footerSeguro.php'; ?>
-    <!--Script das paginas seguras-->
+    <!--Script das paginas seguro-->
     <script src="../../assets/js/scriptSeguro.js"></script>
 </body>
 </html>

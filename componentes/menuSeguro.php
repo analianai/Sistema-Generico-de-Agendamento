@@ -15,7 +15,7 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                     </a>
                 </div>
                 <div class="text-white d-flex justify-content-end">
-                    <?php echo  htmlspecialchars($_SESSION['nome']);?>
+                    <?php echo htmlspecialchars($_SESSION['nome']);?>
                 </div>
                 <div class="dropdown">
                     <button class="nav-link dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">

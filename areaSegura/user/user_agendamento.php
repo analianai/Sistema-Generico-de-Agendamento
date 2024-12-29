@@ -1,4 +1,14 @@
-<?php include '../../componentes/user_auth.php'; ?>
+<?php
+session_start();
+
+if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
+    header("Location: ../sing_in.php?error=Acesso negado.");
+    exit;
+}
+
+// conexão ao banco de dados
+$mysqli = new mysqli("localhost", "root", "", "salao");
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">

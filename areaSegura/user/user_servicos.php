@@ -6,10 +6,11 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
     exit;
 }
 
+// conexão ao banco de dados
 $mysqli = new mysqli("localhost", "root", "", "salao");
 
 // Consultar categorias e serviços
-$query_categorias = "SELECT id, nome FROM categorias";
+$query_categorias = "SELECT cat_id, nome FROM categorias";
 $result_categorias = $mysqli->query($query_categorias);
 
 ?>
@@ -38,7 +39,7 @@ $result_categorias = $mysqli->query($query_categorias);
 
     <section class="container">
     <?php while ($categoria = $result_categorias->fetch_assoc()) { 
-            $categoria_id = $categoria['id'];
+            $categoria_id = $categoria['cat_id'];
             $query_servicos = "SELECT titulo, descricao, codigo, duracao, valor, observacao, imagem FROM servicos WHERE categoria_id = $categoria_id";
             $result_servicos = $mysqli->query($query_servicos);
         ?>
