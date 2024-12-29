@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     // Caso o acesso não seja via POST, redireciona para o formulário
-    header("Location: sing_up.php");
+    header("Location: ../sing_up.php");
     exit;
 }
 ?>

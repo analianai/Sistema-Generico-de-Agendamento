@@ -1,7 +1,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-success bg-gradient">
         <div class="container">
-            <a class="navbar-brand d-flex justify-content-start text-white" href="#">Salão de Beleza</a>
+            <a class="navbar-brand d-flex justify-content-start text-white" href="index.php">Salão de Beleza</a>
             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon text-white"></span>
             </button>
@@ -23,7 +23,7 @@
                         <a class="nav-link text-white" href="faq.php">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#agendamentoModal" href="#">Entrar</a>
+                        <a type="button" class="btn btn-outline-light ms-3" data-bs-toggle="modal" data-bs-target="#agendamentoModal" href="#"><i class="bi bi-box-arrow-in-right"></i> Entrar</a>
                     </li>
                 </ul>
             </div>
@@ -88,7 +88,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <form id="cadastroForm" action="conexao/register.php" method="POST" class="needs-validation" novalidate>
+                    <form id="cadastroForm" action="conexao/register.php" method="POST" class="needs-validation" novalidate>
                             <!-- Nome -->
                             <div class="mb-3">
                                 <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome" required>

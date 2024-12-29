@@ -167,7 +167,6 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                     <tr class="text-center">
                         <th>#</th>
                         <th>Categoria</th>
-                        <th>Id Categoria</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -176,21 +175,55 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                     <tr class="text-center">
                         <td><?= $index + 1 ?></td>
                         <td><?= htmlspecialchars($categoria['nome']) ?></td>
-                        <td><?= htmlspecialchars($categoria['cat_id']) ?></td>
                         <td>
                             <!-- Formulário de Atualização -->
-                            <form method="POST" action1="" class="d-inline">
-                                <input type="hidden" name="action1" value="update_categoria">
-                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
-                                <input type="text" name="cat_nome" placeholder="Novo Nome" required>
-                                <button type="submit" class="btn btn-success">Atualizar</button>
-                            </form>
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#atualizar<?= $categoria['cat_id'] ?>">
+                                <i class="bi bi-arrow-repeat fs-5"></i>
+                            </button>
+                            <!-- Modal Atualizar Categoria-->
+                            <div class="modal fade" id="atualizar<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="atualizarLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header bg-success text-white text-center">
+                                        <h4 class="modal-title w-100 fs-5" id="atualizarLabel">Atualize a categoria <?= htmlspecialchars($categoria['nome']) ?></h4>
+                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action1="" class="d-inline">
+                                            <input type="hidden" name="action1" value="update_categoria">
+                                            <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
+                                            <input type="text" name="cat_nome" class="form-control" placeholder="Novo Nome" value="<?= htmlspecialchars($categoria['nome']) ?>" required>
+                                            <button type="button" class="btn btn-outline-danger mt-3 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                            <button type="submit" class="btn btn-outline-success mt-3"><i class="bi bi-arrow-repeat"></i> Salvar</button>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Formulário de Exclusão -->
-                            <form method="POST" action1="" class="d-inline">
-                                <input type="hidden" name="action1" value="delete_categoria">
-                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
-                                <button type="submit" class="btn btn-danger">Excluir</button>
-                            </form>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#excluir<?= $categoria['cat_id'] ?>">
+                                <i class="bi bi-trash fs-5"></i>
+                            </button>
+                            <!-- Modal Excluir Categoria-->
+                            <div class="modal fade" id="excluir<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="excluirLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger text-white text-center">
+                                            <h5 class="modal-title w-100 fs-5" id="excluirLabel">Deseja excluir a categoria <?= htmlspecialchars($categoria['nome']) ?> ? </h5>
+                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action1="" class="d-inline">
+                                                <input type="hidden" name="action1" value="delete_categoria">
+                                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
+                                                <button type="button" class="btn btn-outline-success me-2" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
+                                                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -198,7 +231,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
             </table>
         </div>
     </section>
-
+                        
     <!--Serviços por categorias--> 
     <section id="admin_servicos" class="container pt-5 ">
         <?php 
@@ -217,10 +250,10 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                 <div class="row mt-3">
                     <?php foreach ($servicos as $servico): ?>
                         <div class="col-md-3">
-                            <div class="card mb-4">
+                            <div class="card mb-4 shadow-sm">
                                 <img src="<?= htmlspecialchars($servico['imagem']) ?>" class="card-img-top" style="height:220px;" alt="Imagem do Serviço">
                                 <div class="card-body">
-                                    <h4 class="card-title text-center"><?= htmlspecialchars($servico['titulo']) ?></h4>
+                                    <h5 class="card-title text-center"><?= htmlspecialchars($servico['titulo']) ?></h5>
                                     <p class="card-text">Descrição: <?= htmlspecialchars($servico['descricao']) ?></p>
                                     <div class="d-flex justify-content-between">
                                         <p class="card-text">Código: <?= htmlspecialchars($servico['codigo']) ?></p>
@@ -243,12 +276,12 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                         <div class="modal fade" id="AtualizarServico<?= $servico['id'] ?>" tabindex="-1" aria-labelledby="AtualizarServicoLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header text-center">
+                                    <div class="modal-header text-center bg-success text-white">
                                         <h5 class="modal-title w-100" id="AtualizarServicoLabel">Atualizar Serviço</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="" method="POST" enctype="multipart/form-data" class="row g-3">
+                                        <form action="" method="POST" enctype="multipart/form-data" class="row">
                                             <input type="hidden" name="action" value="update">
                                             <input type="hidden" name="id" value="<?= $servico['id'] ?>">
                                             <input type="hidden" name="existing_imagem" value="<?= htmlspecialchars($servico['imagem']) ?>">
@@ -305,13 +338,13 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                                             <!-- Campo de Observação -->
                                             <div class="col-md-12">
                                                 <label for="observacao" class="form-label">Observação:</label>
-                                                <textarea class="form-control" name="observacao" rows="2"><?= htmlspecialchars($servico['observacao']) ?></textarea>
+                                                <textarea class="form-control" name="observacao" rows="1"><?= htmlspecialchars($servico['observacao']) ?></textarea>
                                             </div>
 
                                             <!-- Botões -->
                                             <div class="col-md-12 text-center mt-3 mb-3">
-                                                <button type="submit" class="btn btn-outline-success me-3"><i class="bi bi-arrow-repeat"></i> Salvar</button>
                                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                                <button type="submit" class="btn btn-outline-success me-3"><i class="bi bi-arrow-repeat"></i> Salvar</button> 
                                             </div>
                                         </form>
                                     </div>
@@ -323,9 +356,14 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                         <div class="modal fade" id="DeletarServico<?= $servico['id'] ?>" tabindex="-1" aria-labelledby="DeletarServicoLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-body rosa rounded text-center">
-                                        <p class="text-center fs-5">Deseja excluir o serviço <strong><?= $servico['titulo'] ?></strong>?</p>
-                                        *Ao excluir este serviço ele será removido permanentemente.
+                                    <div class="modal-header bg-danger text-center text-white">
+                                        <h5 class="modal-title w-100" id="DeletarServicoLabel">
+                                            Deseja excluir o serviço <strong><?= $servico['titulo'] ?></strong>?<br>
+                                            <i class="fs-6">* O serviço será removido permanentemente.</i>
+                                        </h5>
+                                        <button type="button" class="btn text-white top-0" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                    </div>
+                                    <div class="modal-body text-center">                                   
                                         <button type="button" class="btn btn-outline-success mt-4 me-3" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
                                         <form action="" method="POST" style="display:inline;">
                                             <input type="hidden" name="action" value="delete">

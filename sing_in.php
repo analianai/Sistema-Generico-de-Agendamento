@@ -9,41 +9,14 @@
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        body{
-            background: rgb(230, 231, 230);
-            }
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/img/makes.jpg');
+        }
     </style>
 </head>
 <body>
 <!-- Navbar -->
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-success bg-gradient">
-        <div class="container">
-            <a class="navbar-brand d-flex justify-content-start text-white" href="#">Salão de Beleza</a>
-            <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon text-white"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item ">
-                        <a class="nav-link text-white" href="index.php">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="sobre.php">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="midia.php">Mídia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="servicos.php">Serviços</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="faq.php">FAQ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include './componentes/menu.php'; ?>
 
 <!-- Container principal -->
     <div class="container vh-100 d-flex align-items-center justify-content-center">
@@ -69,7 +42,7 @@
                 </div>
                 <div class="mb-3 d-flex justify-content-center">
                     <button type="reset" class="btn btn-danger me-4">Limpar</button>
-                    <button type="submit" class="btn btn-success">Entrar</button>  
+                    <button type="submit" class="btn btn-success"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>  
                 </div>
             </form>
             <div class="text-center"><span>OU</span></div>

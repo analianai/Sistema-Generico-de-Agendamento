@@ -1,3 +1,5 @@
+
+console.log('Script carregado com sucesso!');
 document.addEventListener('DOMContentLoaded', function () {
     // Seleção dos formulários
     const loginForm = document.getElementById('loginForm');

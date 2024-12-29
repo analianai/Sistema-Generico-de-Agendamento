@@ -1,3 +1,4 @@
+console.log('Script carregado com sucesso!');
 // Alterna a visibilidade da senha
 function togglePassword(fieldId) {
     const field = document.getElementById(fieldId);

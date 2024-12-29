@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mysqli->close();
 } else {
     // Se não for uma requisição POST, redirecione para o login
-    header("Location: ../../sing_in.php");
+    header("Location: ../sing_in.php");
     exit;
 }
 ?>
