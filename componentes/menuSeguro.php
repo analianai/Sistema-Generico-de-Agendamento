@@ -45,6 +45,9 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                         </li>
                         <?php elseif ($nivel_acesso == USER): ?>
                         <li>
+                            <a class="dropdown-item" href="user_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a>
+                        </li>
+                        <li>
                             <a class="dropdown-item" href="user_agendamento.php"><i class="bi bi-journal-bookmark-fill"></i> Agendamento</a>
                         </li>
                         <li>

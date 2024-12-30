@@ -38,3 +38,11 @@ CREATE TABLE servicos (
         ON UPDATE CASCADE
 )
 
+CREATE TABLE depoimentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,                   -- Chave estrangeira para usuários
+    comentario TEXT NOT NULL,               -- Texto do depoimento
+    aprovacao INT NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação
+    FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);

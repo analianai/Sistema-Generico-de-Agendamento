@@ -68,6 +68,8 @@ if (isset($_POST['atualizar'])) {
     header("Location: admin_gerenciar_usuarios.php");
     exit; 
 }
+
+$cont = 0;
 // Fecha a conexão com o banco de dados
 $mysqli->close();
 ?>
@@ -117,6 +119,7 @@ $mysqli->close();
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col">#</th>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Nível de Acesso</th>
@@ -126,6 +129,7 @@ $mysqli->close();
         <tbody>
             <?php while ($user = $result->fetch_assoc()) : ?>
                 <tr>
+                    <th scope="row"><?= $cont= $cont + 1 ?></th>
                     <td><?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></td>
                     <td><?php echo htmlspecialchars($user['username']); ?></td>
                     <td>

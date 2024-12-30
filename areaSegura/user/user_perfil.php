@@ -2,10 +2,8 @@
 // Inicia a sessão
 session_start();
 
-// Verifica se o usuário está logado
-if (!isset($_SESSION['username'])) {
-    // Redireciona para a página de login se não estiver logado
-    header('Location: sing_in.php');
+if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
+    header("Location: ../sing_in.php?error=Acesso negado.");
     exit;
 }
 

@@ -369,7 +369,7 @@ $mysqli->close();
 
                     <!-- Botões -->
                     <div class="mb-3 d-flex justify-content-center">
-                        <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar </button>
+                        <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
                         <button type="submit" class="btn btn-outline-success"><i class="bi bi-arrow-repeat"></i> Salvar</button>
                     </div>
                 </form>
