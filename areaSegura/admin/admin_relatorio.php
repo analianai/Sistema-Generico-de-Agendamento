@@ -20,7 +20,7 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
 </head>
 <body>
     <!-- memu -->
-    <?php include '../componentes/menuSeguro.php'; ?>
+    <?php include '../../componentes/menuSeguro.php'; ?>
 
     <section class="container">
         <div class="mt-5">

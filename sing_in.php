@@ -15,6 +15,9 @@
     </style>
 </head>
 <body>
+
+<!-- Erro -->
+<?php include './componentes/erro.php'; ?>
 <!-- Navbar -->
 <?php include './componentes/menu.php'; ?>
 
@@ -30,9 +33,9 @@
                     </div>
                 <div class="mb-3">
                     <div class="input-group">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Senha" required>
-                        <button type="button" class="btn  border border-secondary-subtle rounded-end" onclick="togglePassword('password')">
-                            <i class="bi bi-eye" id="password-icon"></i>
+                        <input type="password" name="senha_in" class="form-control" id="senha_in" placeholder="Senha" required>
+                        <button type="button" class="btn  border border-secondary-subtle rounded-end" onclick="togglePassword('senha_in')">
+                            <i class="bi bi-eye" id="senha_in-icon"></i>
                         </button>
                     </div>
                 </div>
@@ -62,8 +65,8 @@
             </div>
         </div>
     </div>
-
+    
      <!-- Footer -->
-    <?php include './componentes/footer.php'; ?>  
+    <?php include './componentes/footer.php'; ?> 
 </body>
 </html>

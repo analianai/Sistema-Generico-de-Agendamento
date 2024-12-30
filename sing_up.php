@@ -99,9 +99,9 @@
                     <!-- Senha -->
                     <div class="mb-3">
                         <div class="input-group">
-                            <input type="password" name="senha" class="form-control" id="senha" placeholder="Senha" required>
-                            <button type="button" class="btn  border border-secondary-subtle rounded-end" onclick="togglePassword('senha')">
-                                <i class="bi bi-eye" id="senha-icon"></i>
+                            <input type="password" name="senha_up" class="form-control" id="senha_up" placeholder="Senha" required>
+                            <button type="button" class="btn  border border-secondary-subtle rounded-end" onclick="togglePassword('senha_up')">
+                                <i class="bi bi-eye" id="senha_up-icon"></i>
                             </button>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -109,9 +109,9 @@
                     <!-- Confirmar Senha -->
                     <div class="mb-3">
                         <div class="input-group">
-                            <input type="password" name="confirmar_senha" class="form-control" id="confirmarSenha" placeholder="Confirme sua senha" required>
-                            <button type="button" class="btn border border-secondary-subtle rounded-end" onclick="togglePassword('confirmarSenha')">
-                                <i class="bi bi-eye" id="confirmarSenha-icon"></i>
+                            <input type="password" name="confirmar_senha_up" class="form-control" id="confirmarSenha_up" placeholder="Confirme sua senha" required>
+                            <button type="button" class="btn border border-secondary-subtle rounded-end" onclick="togglePassword('confirmarSenha_up')">
+                                <i class="bi bi-eye" id="confirmarSenha_up-icon"></i>
                             </button>
                             <div class="invalid-feedback"></div>
                         </div>
