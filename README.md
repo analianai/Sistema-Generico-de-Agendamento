@@ -1,12 +1,13 @@
-# Salão de Beleza
+# Sistema Genérico de Agendamento
 
-Este projeto é um site responsivo para um Salão de Beleza, criado utilizando o framework Bootstrap. O objetivo é fornecer informações claras e acessíveis para clientes, incluindo serviços, mídia, FAQs e contato.
+Este projeto é um site responsivo Genérico de Agendamento e utiliza como exemplo um salão de Beleza, criado utilizando o framework Bootstrap. O objetivo é fornecer informações claras e acessíveis para clientes, incluindo serviços, mídia, FAQs e contato.
 
 ## Tecnologias Utilizadas
 - **php**: Estrutura do site.
 - **CSS3**: Estilização adicional (quando necessário).
 - **Bootstrap 5**: Framework utilizado para design responsivo e componentes pré-prontos.
 - **JavaScript**: Para interatividade (modais e outros componentes do Bootstrap).
+- **PHP**: Para fazer o Backend do sistema.
 
 ## Páginas
 
