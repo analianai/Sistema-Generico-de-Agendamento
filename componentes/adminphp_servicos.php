@@ -74,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } else {
         $_SESSION['mensagem_erro'] = 'Erro ao atualizar o serviço!';
     }
-    
+
+    // deletar serviços
     if ($action === 'delete') {
         $id = $_POST['id'];
 
@@ -84,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $stmt->execute();
 
         $_SESSION['mensagem_sucesso'] = 'Serviço Deletado com sucesso!';
+
     } else{
         $_SESSION['mensagem_erro'] = 'Erro ao deletar o serviço!';
     }
@@ -96,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 // Recuperar serviços
 $servicos = $mysqli->query("SELECT s.*, c.nome AS categoria_nome FROM servicos s LEFT JOIN categorias c ON s.categoria_id = c.cat_id")->fetch_all(MYSQLI_ASSOC);
 
+//CATEGORIAS
 // Lógica de inserção de categorias
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['nova_categoria']) && !empty($_POST['nova_categoria'])) {
@@ -128,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-
 
 // Processar requisições POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

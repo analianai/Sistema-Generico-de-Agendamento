@@ -23,11 +23,6 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        .btn-success {
-            background-color:rgb(115, 255, 112);
-            color: black;
-            border-color: rgb(77, 255, 85);
-        }
         #mensagem-sucesso, #mensagem-erro {
             position: fixed; /* Fixar a mensagem no topo da página */
             top: 20px; /* Distância do topo */
@@ -37,7 +32,6 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
             width: auto; /* Ajusta largura */
             max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
         }
-
     </style>
 </head>
 <body>
@@ -189,7 +183,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                                         <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action1="" class="d-inline">
+                                        <form method="POST" action="" class="d-inline">
                                             <input type="hidden" name="action1" value="update_categoria">
                                             <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
                                             <input type="text" name="cat_nome" class="form-control" placeholder="Novo Nome" value="<?= htmlspecialchars($categoria['nome']) ?>" required>
