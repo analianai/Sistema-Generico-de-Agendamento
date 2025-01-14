@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verifica se os campos estão preenchidos
     if (empty($username) || empty($password)) {
-        header("Location: ../sing_in.php?error=Preencha todos os campos");
+        header("Location: ../sign_in.php?error=Preencha todos os campos");
         exit;
     }
 
@@ -51,12 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } else {
             // Senha incorreta
-            header("Location: ../sing_in.php?error=Senha incorreta");
+            header("Location: ../sign_in.php?error=Senha incorreta");
             exit;
         }
     } else {
         // Usuário não encontrado
-        header("Location: ../sing_in.php?error=Usuário não encontrado");
+        header("Location: ../sign_in.php?error=Usuário não encontrado");
         exit;
     }
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mysqli->close();
 } else {
     // Se não for uma requisição POST, redirecione para o login
-    header("Location: ../sing_in.php");
+    header("Location: ../sign_in.php");
     exit;
 }
 ?>

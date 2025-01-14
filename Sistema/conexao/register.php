@@ -47,19 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redireciona para a página de sucesso ou exibe uma mensagem
-        header("Location: ../sing_in.php");
+        header("Location: ../sign_in.php");
         exit;
     } catch (PDOException $e) {
         // Trata erros de chave única violada
         if ($e->getCode() == 23000) {
-            echo "Erro: O e-mail ou CPF já está cadastrado.";
+            $mensagemErro = "Erro: E-mail ou CPF já cadastrado!";
         } else {
-            echo "Erro ao cadastrar: " . $e->getMessage();
+            $mensagemErro = "Erro ao cadastrar: " . $e->getMessage();
         }
+        header("Location: ../sign_up.php?erro=" . urlencode($mensagemErro));
+        exit;
     }
 } else {
     // Caso o acesso não seja via POST, redireciona para o formulário
-    header("Location: ../sing_up.php");
+    header("Location: ../sign_up.php");
     exit;
 }
 ?>

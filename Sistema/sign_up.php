@@ -1,4 +1,39 @@
-    <!-- Navbar -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão de Beleza</title>
+    <!-- Bootstrap css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap css Icons-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/img/depilacao.webp') no-repeat center center fixed;
+        }
+        .mensagem-erro-cadastro {
+            position: fixed; /* Fixar a mensagem no topo da página */
+            top: 20px; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição centralizada */
+            z-index: 1050; /* Garante que a mensagem esteja acima de outros elementos */
+            width: auto; /* Ajusta largura */
+            max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
+        }
+   </style>
+</head>
+<body>
+<!-- Erro -->
+<?php if (isset($_GET['erro']) && !empty($_GET['erro'])): ?>
+        <div id="mensagem-erro" class="alert alert-danger mt-5 d-flex justify-content-between mensagem-erro-cadastro" >
+            <?= htmlspecialchars($_GET['erro']) ?>
+            <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+<?php endif; ?>
+<!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-md-top bg-success bg-gradient">
         <div class="container">
             <a class="navbar-brand d-flex justify-content-start text-white" href="index.php">Salão de Beleza</a>
@@ -23,72 +58,20 @@
                         <a class="nav-link text-white" href="faq.php">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-outline-light ms-3" data-bs-toggle="modal" data-bs-target="#agendamentoModal" href="#"><i class="bi bi-box-arrow-in-right"></i> Entrar</a>
+                        <a type="button" href="sign_in.php" class="btn btn-outline-light ms-3"><i class="bi bi-box-arrow-in-right"></i> Entrar</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- Modal for login -->
-    <div class="modal fade" id="agendamentoModal" tabindex="-1" aria-labelledby="agendamentoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="agendamentoModalLabel">Entre e agende seu horário</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm" action="conexao/login.php" method="POST" novalidate>                  
-                            <div class="mb-3">
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Email" required>
-                            </div>
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Senha" required>
-                                <button type="button" class="btn  border border-secondary-subtle rounded-end" onclick="togglePassword('password')">
-                                    <i class="bi bi-eye" id="password-icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Alert de erro (invisível por padrão) -->
-                        <div id="alertContainer" class="alert alert-danger d-none" role="alert">
-                            <ul id="errorList" class="mb-0"></ul>
-                        </div>
-                        <div class="mb-3 d-flex justify-content-center">
-                            <button type="reset" class="btn btn-danger me-4">Limpar</button>
-                            <button type="submit" class="btn btn-success">Entrar</button>  
-                        </div>
-                    </form>
-                    <div class="text-center"><span>OU</span></div>
-                    
-                    <div class="mt-1 mb-4 text-center">
-                        Não tem uma conta?
-                        <a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#cadastroModal" data-bs-dismiss="modal">Cadastre-se</a>
-                    </div>
-                    <div class="d-flex align-items-center mt-3">
-                        <hr class="flex-grow-1" />
-                        <button type="button"
-                        class="btn btn-light px-3 mx-2 d-flex align-items-center justify-content-center">
-                        <img class="border-opacity-10" src="https://developers.google.com/identity/images/g-logo.png"
-                            alt="Google" width="30px">
-                        </button>
-                        <hr class="flex-grow-1" />
-                    </div>
-                </div>   
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal for Cadastro -->
-    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title w-100" id="cadastroModalLabel">Cadastre-se</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="cadastroForm" action="conexao/register.php" method="POST" class="needs-validation" novalidate>
+        <!-- Container principal -->
+    <section class="container-fluid mt-5 mb-5">
+        <div class="container vh-100 d-flex align-items-center justify-content-center">
+            <div class="card shadow-lg ps-4 pe-4 pt-2 mt-5" style="width: 100%; max-width: 600px;">
+                <h2 class="text-center mb-1">Salão de Beleza</h2>
+                <p class="text-center mb-2 fs-5">Cadastre-se</p>
+                <form id="cadastroForm" action="conexao/register.php" method="POST" class="needs-validation" novalidate>
                             <!-- Nome -->
                             <div class="mb-3">
                                 <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome" required>
@@ -190,7 +173,29 @@
                                 <button type="submit" class="btn btn-success">Cadastrar</button>
                             </div>
                     </form>
+                <div class="mt-1 mb-4 text-center">
+                        Se tem uma conta?
+                        <a href="./sing_in.php" >Entre</a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <?php include './componentes/footer.php'; ?>  
+    <!-- Script para ocultar a mensagem após 4 segundos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mensagemErro = document.getElementById('mensagem-erro');
+            if (mensagemErro) {
+                setTimeout(() => {
+                    mensagemErro.style.transition = 'opacity 0.5s';
+                    mensagemErro.style.opacity = '0';
+                    setTimeout(() => mensagemErro.remove(), 500); // Remove o elemento após a animação
+                }, 4000); // Tempo de exibição: 4 segundos
+            }
+        });
+    </script>
+
+</body>
+</html>
