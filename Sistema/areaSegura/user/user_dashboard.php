@@ -223,7 +223,7 @@ $mysqli->close();
                                                     <div class="modal-body">
                                                         <form action="" method="post">
                                                             <input type="hidden" name="depoimento_id" value="<?= $depoimento['id'] ?>">
-                                                            <textarea class="form-control" name="comentario" rows="3"><?= htmlspecialchars($depoimento['comentario']) ?></textarea>
+                                                            <textarea class="form-control" name="comentario" rows="3" maxlength="90"><?= htmlspecialchars($depoimento['comentario']) ?></textarea>
                                                             <div class="mt-3 text-center">
                                                                 <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
                                                                 <button type="submit" name="update" class="btn btn-outline-primary"><i class="bi bi-arrow-repeat"></i> Salvar</button>
