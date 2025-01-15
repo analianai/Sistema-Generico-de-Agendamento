@@ -27,7 +27,8 @@ $query = "
         depoimentos.id AS depoimento_id, 
         depoimentos.comentario, 
         depoimentos.aprovacao, 
-        depoimentos.data_criacao
+        depoimentos.data_criacao,
+        depoimentos.data_aprovacao
     FROM 
         usuarios
     LEFT JOIN 
@@ -35,8 +36,9 @@ $query = "
     ON 
         usuarios.id = depoimentos.user_id
     ORDER BY 
-        usuarios.nome ASC
+        depoimentos.data_aprovacao DESC, usuarios.nome ASC
 ";
+
 $result = $mysqli->query($query);
 
 if (!$result) {
@@ -61,7 +63,8 @@ while ($row = $result->fetch_assoc()) {
             'depoimento_id' => $row['depoimento_id'], // Inclui o ID do depoimento
             'comentario' => $row['comentario'],
             'aprovacao' => $row['aprovacao'],
-            'data_criacao' => $row['data_criacao']
+            'data_criacao' => $row['data_criacao'],
+            'data_aprovacao' => $row['data_aprovacao']
         ];
     }    
 }
@@ -92,11 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
 }
 
 // Função de alteração de status
+// Função de alteração de status
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status'])) {
     $depoimento_id = intval($_POST['depoimento_id']);
     
     // Verifica o status atual e alterna
-    $query = "SELECT aprovacao FROM depoimentos WHERE id = ?";
+    $query = "SELECT aprovacao, data_aprovacao FROM depoimentos WHERE id = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $depoimento_id);
     $stmt->execute();
@@ -106,10 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status'])) {
         $row = $result->fetch_assoc();
         $novo_status = $row['aprovacao'] == 1 ? 0 : 1; // Alterna entre 0 (Pendente) e 1 (Aprovado)
         
-        // Atualiza o status
-        $update_query = "UPDATE depoimentos SET aprovacao = ? WHERE id = ?";
+        // Define a data de aprovação se o novo status for aprovado (1)
+        $data_aprovacao = $novo_status == 1 ? date('Y-m-d H:i:s') : NULL; // Define a data atual ou NULL
+        
+        // Atualiza o status e a data de aprovação
+        $update_query = "UPDATE depoimentos SET aprovacao = ?, data_aprovacao = ? WHERE id = ?";
         $update_stmt = $mysqli->prepare($update_query);
-        $update_stmt->bind_param("ii", $novo_status, $depoimento_id);
+        $update_stmt->bind_param("isi", $novo_status, $data_aprovacao, $depoimento_id); // Data de aprovação como string
         
         if ($update_stmt->execute()) {
             $_SESSION['mensagem_sucesso'] = "Status do depoimento alterado com sucesso.";
@@ -126,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
+
 
 
 $cont = 0;
@@ -224,6 +232,7 @@ $mysqli->close();
                                                                 <p>"<?= htmlspecialchars($depoimento['comentario']); ?>"</p>
                                                                 <small>
                                                                     Enviado em: <i><?= date('d/m/Y', strtotime($depoimento['data_criacao'])); ?></i><br>
+                                                                    Aprovado em: <i><?= date('d/m/Y', strtotime($depoimento['data_aprovacao'])); ?></i><br>
                                                                     Status: <i><?= $depoimento['aprovacao'] ? 'Aprovado' : 'Pendente'; ?></i>
                                                                 </small>
                                                                 <div class="d-flex justify-content-center">

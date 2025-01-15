@@ -169,13 +169,13 @@
                             </div>
                             <!-- Botões -->
                             <div class="mb-3 d-flex justify-content-center">
-                                <button type="reset" class="btn btn-danger me-4">Limpar</button>
-                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <button type="reset" class="btn btn-danger me-4"><i class="bi bi-x-circle-fill"></i> Limpar</button>
+                                <button type="submit" class="btn btn-success"><i class="bi bi-box-arrow-in-right"></i> Cadastrar</button>
                             </div>
                     </form>
                 <div class="mt-1 mb-4 text-center">
                         Se tem uma conta?
-                        <a href="./sing_in.php" >Entre</a>
+                        <a href="./sign_in.php" >Entre</a>
                 </div>
             </div>
         </div>

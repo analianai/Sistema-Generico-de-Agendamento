@@ -1,3 +1,37 @@
+<?php
+// Conexão com o banco de dados
+$mysqli = new mysqli("localhost", "root", "", "salao");
+
+// Verifica se houve erro na conexão
+if ($mysqli->connect_error) {
+    die("Erro ao conectar ao banco de dados: " . $mysqli->connect_error);
+}
+
+// Consulta para pegar os 6 últimos depoimentos aprovados (ordenados pela data de aprovação)
+$query = "
+    SELECT usuarios.nome, depoimentos.comentario
+    FROM depoimentos
+    INNER JOIN usuarios ON depoimentos.user_id = usuarios.id
+    WHERE depoimentos.aprovacao = 1
+    ORDER BY depoimentos.data_aprovacao DESC  -- Ordenando pela data de criação
+    LIMIT 6
+";
+
+$result = $mysqli->query($query);
+
+if (!$result) {
+    die("Erro ao executar a consulta: " . $mysqli->error);
+}
+
+$depoimentos = [];
+while ($row = $result->fetch_assoc()) {
+    $depoimentos[] = $row;
+}
+
+// Fecha a conexão com o banco de dados
+$mysqli->close();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -132,51 +166,20 @@
                 <h2>Depoimentos</h2>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"A experiência foi maravilhosa! Ótimo atendimento e ambiente acolhedor."</p>
-                            <h5 class="card-title">- Ana Maria</h5>
+                <?php foreach ($depoimentos as $depoimento): ?>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <p class="card-text">"<?= htmlspecialchars($depoimento['comentario']); ?>"</p>
+                                <h5 class="card-title">- <?= htmlspecialchars($depoimento['nome']); ?></h5>
+                            </div>
                         </div>
                     </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                            <h5 class="card-title">- João Silva</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                            <h5 class="card-title">- João Silva</h5>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                            <h5 class="card-title">- João Silva</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                            <h5 class="card-title">- João Silva</h5>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">"Equipe muito profissional e atenciosa. Recomendo a todos!"</p>
-                            <h5 class="card-title">- João Silva</h5>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
+
 
     <!-- Serviços Section -->
     <section id="servicos" class="container py-5">

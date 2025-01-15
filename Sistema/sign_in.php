@@ -73,8 +73,8 @@
                             <ul id="errorList" class="mb-0"></ul>
                         </div>
                         <div class="mb-3 d-flex justify-content-center">
-                            <button type="reset" class="btn btn-danger me-4">Limpar</button>
-                            <button type="submit" class="btn btn-success">Entrar</button>  
+                            <button type="reset" class="btn btn-danger me-4"><i class="bi bi-x-circle-fill"></i> Limpar</button>
+                            <button type="submit" class="btn btn-success"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>  
                         </div>
                     </form>
             <div class="text-center"><span>OU</span></div>
