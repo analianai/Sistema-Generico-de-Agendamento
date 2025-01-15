@@ -19,9 +19,9 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         .tamanho{
-            width: 15rem;
-            height: 13rem;
-            font-size: 1.5em;
+            width: 10rem;
+            height: 8rem;
+            font-size: 1em;
         }
         .btn-outline-lilas{
             color: #6f42c1;
@@ -53,10 +53,16 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
                 <button onclick="window.location.href='admin_relatorio.php'" type="button" class="btn btn-outline-primary mb-3 tamanho"><i class="bi bi-graph-up-arrow fs-2"></i><br>Relatórios</button>
             </div>
             <div class="col">
+                <button  onclick="window.location.href='admin_depoimentos.php'" type="button" class="btn btn-outline-warning mb-3 tamanho"><i class="bi bi-megaphone fs-2"></i> <br>Depoimentos</button>
+            </div>
+            <div class="col">
                 <button  onclick="window.location.href='admin_gerenciar_usuarios.php'" type="button" class="btn btn-outline-info mb-3 tamanho"><i class="bi bi-person-fill-gear fs-2"></i><br>Gerenciar Usuários</button>
             </div>
             <div class="col">
                 <button onclick="window.location.href='admin_agendamento.php'" type="button" class="btn btn-outline-secondary mb-3 tamanho"><i class="bi bi-person-lines-fill fs-2"></i><br>Agendamento</button>
+            </div>
+            <div class="col">
+                <button onclick="window.location.href='admin_perfil.php'" type="button" class="btn btn-outline-danger mb-3 tamanho"><i class="bi bi-person-check-fill fs-2"></i><br>Meu Perfil</button>
             </div>
         </div>     
     </section>

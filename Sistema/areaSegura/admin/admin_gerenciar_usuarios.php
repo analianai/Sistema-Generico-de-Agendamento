@@ -116,146 +116,146 @@ $mysqli->close();
         <hr>
     </div>
     <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Nível de Acesso</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($user = $result->fetch_assoc()) : ?>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <th scope="row"><?= $cont= $cont + 1 ?></th>
-                    <td><?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></td>
-                    <td><?php echo htmlspecialchars($user['username']); ?></td>
-                    <td>
-                        <?php 
-                            if ($user['nivel_acesso'] == 0) {
-                                echo "Usuário Comum";
-                            } elseif ($user['nivel_acesso'] == 1) {
-                                echo "Administrador";
-                            } else {
-                                echo "Desconhecido";
-                            }
-                        ?>
-                    </td>
-                    <td>
-                    
-                        <!-- Botão Visualizar usuário -->
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalvisualizar<?php echo $user['id']; ?>">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <!--Modal Visualizar usuario -->
-                        <div class="modal modal-lg" id="modalvisualizar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalvisualizarLabel<?php echo $user['id']; ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-primary text-white text-center">
-                                        <h5 class="modal-title  w-100" id="modalvisualizarLabel<?php echo $user['id']; ?>"> <?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></h5>
-                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><strong>CPF:</strong> <?php echo htmlspecialchars($user['cpf']); ?></p> 
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><strong>Data Nascimento:</strong> <?php echo htmlspecialchars(date("d-m-Y", strtotime($user['data_nascimento']))); ?></p> 
-                                            </div>
-                                            <div class="col-md-4">
-                                            <p><strong>Nível de Acesso: </strong> <?php 
-                                                    if ($user['nivel_acesso'] == 0) {
-                                                        echo "Usuário Comum";
-                                                    } elseif ($user['nivel_acesso'] == 1) {
-                                                        echo "Administrador";
-                                                    } else {
-                                                        echo "Desconhecido";
-                                                    }
-                                                ?></p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><strong>Celular:</strong> <?php echo htmlspecialchars($user['celular']); ?></p>  
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><strong>Whatsapp:</strong> <?php echo htmlspecialchars($user['whatsapp']); ?></p>
-                                            </div> 
-                                            <div class="col-md-12">        
-                                                <p><strong>Endereço:</strong> <?php echo htmlspecialchars($user['endereco']); ?></p>
-                                            </div>
-                                            <div class="col-md-6">    
-                                                <p><strong>Cidade:</strong> <?php echo htmlspecialchars($user['cidade']); ?></p>  
-                                            </div>
-                                            <div class="col-md-6">     
-                                                <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['estado']); ?></p>
+                    <th scope="col">#</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Nível de Acesso</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($user = $result->fetch_assoc()) : ?>
+                    <tr>
+                        <th scope="row"><?= $cont= $cont + 1 ?></th>
+                        <td><?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></td>
+                        <td><?php echo htmlspecialchars($user['username']); ?></td>
+                        <td>
+                            <?php 
+                                if ($user['nivel_acesso'] == 0) {
+                                    echo "Usuário Comum";
+                                } elseif ($user['nivel_acesso'] == 1) {
+                                    echo "Administrador";
+                                } else {
+                                    echo "Desconhecido";
+                                }
+                            ?>
+                        </td>
+                        <td>
+                        
+                            <!-- Botão Visualizar usuário -->
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalvisualizar<?php echo $user['id']; ?>">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <!--Modal Visualizar usuario -->
+                            <div class="modal modal-lg" id="modalvisualizar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalvisualizarLabel<?php echo $user['id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-primary text-white text-center">
+                                            <h5 class="modal-title  w-100" id="modalvisualizarLabel<?php echo $user['id']; ?>"> <?php echo htmlspecialchars($user['nome'] . ' ' . $user['sobrenome']); ?></h5>
+                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p><strong>CPF:</strong> <?php echo htmlspecialchars($user['cpf']); ?></p> 
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p><strong>Data Nascimento:</strong> <?php echo htmlspecialchars(date("d-m-Y", strtotime($user['data_nascimento']))); ?></p> 
+                                                </div>
+                                                <div class="col-md-4">
+                                                <p><strong>Nível de Acesso: </strong> <?php 
+                                                        if ($user['nivel_acesso'] == 0) {
+                                                            echo "Usuário Comum";
+                                                        } elseif ($user['nivel_acesso'] == 1) {
+                                                            echo "Administrador";
+                                                        } else {
+                                                            echo "Desconhecido";
+                                                        }
+                                                    ?></p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p><strong>Celular:</strong> <?php echo htmlspecialchars($user['celular']); ?></p>  
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p><strong>Whatsapp:</strong> <?php echo htmlspecialchars($user['whatsapp']); ?></p>
+                                                </div> 
+                                                <div class="col-md-12">        
+                                                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($user['endereco']); ?></p>
+                                                </div>
+                                                <div class="col-md-6">    
+                                                    <p><strong>Cidade:</strong> <?php echo htmlspecialchars($user['cidade']); ?></p>  
+                                                </div>
+                                                <div class="col-md-6">     
+                                                    <p><strong>Estado:</strong> <?php echo htmlspecialchars($user['estado']); ?></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Botão ATUALIZAR usuário -->
-                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalAtualizar<?php echo $user['id']; ?>">
-                        <i class="bi bi-arrow-repeat"></i>
-                        </button>
-                        <!-- Modal ATUALIZAR usuário -->
-                        <div class="modal" id="modalAtualizar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalAtualizarLabel<?php echo $user['id']; ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-success text-white text-center">
-                                        <h5 class="modal-title  w-100" id="modalAtualizarLabel<?php echo $user['id']; ?>"> Atualize o nível de acesso e ou o email do usuário</h5>
-                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <form action="admin_gerenciar_usuarios.php" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                        <label for="username">Email:</label>
-                                        <input type="email" name="username" class="form-control" id="username" placeholder="Email" value="<?php echo htmlspecialchars($user['username']); ?>" required>
-                                        <label for="nivel_acesso">Nível de Acesso:</label>
-                                        <select name="nivel_acesso" id="nivel_acesso" class="form-select" >
-                                            <option value="" selected>Nível de Acesso</option>
-                                            <option value="0" <?php echo $user['nivel_acesso'] == '0' ? 'selected' : 'Usuário Comum'; ?>>Usuário Comum</option>
-                                            <option value="1" <?php echo $user['nivel_acesso'] == '1' ? 'selected' : 'Administrador'; ?>>Administrador</option>
-                                        </select>
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
-                                            <button type="submit" name="atualizar" class="btn btn-outline-success"><i class="bi bi-arrow-repeat"></i> Salvar</button>
+                            <!-- Botão ATUALIZAR usuário -->
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalAtualizar<?php echo $user['id']; ?>">
+                            <i class="bi bi-arrow-repeat"></i>
+                            </button>
+                            <!-- Modal ATUALIZAR usuário -->
+                            <div class="modal" id="modalAtualizar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalAtualizarLabel<?php echo $user['id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-success text-white text-center">
+                                            <h5 class="modal-title  w-100" id="modalAtualizarLabel<?php echo $user['id']; ?>"> Atualize o nível de acesso e ou o email do usuário</h5>
+                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
                                         </div>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Botão DELETAR usuário -->
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalDeletar<?php echo $user['id']; ?>">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        <!-- Modal Deletar -->
-                        <div class="modal" id="modalDeletar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalDeletarLabel<?php echo $user['id']; ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content text-center">
-                                    <div class="modal-header bg-danger text-white text-center">
-                                        <h5 class="modal-title  w-100" id="modalDeletarLabel<?php echo $user['id']; ?>"> Tem certeza que deseja deletar o usuário?</h5>
-                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                                    </div>
-                                    <div class="modal-body">
+                                        <div class="modal-body">
                                         <form action="admin_gerenciar_usuarios.php" method="post">
                                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
-                                            <button type="submit" name="deletar" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
-                                        </form>    
+                                            <label for="username">Email:</label>
+                                            <input type="email" name="username" class="form-control" id="username" placeholder="Email" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                                            <label for="nivel_acesso">Nível de Acesso:</label>
+                                            <select name="nivel_acesso" id="nivel_acesso" class="form-select" >
+                                                <option value="" selected>Nível de Acesso</option>
+                                                <option value="0" <?php echo $user['nivel_acesso'] == '0' ? 'selected' : 'Usuário Comum'; ?>>Usuário Comum</option>
+                                                <option value="1" <?php echo $user['nivel_acesso'] == '1' ? 'selected' : 'Administrador'; ?>>Administrador</option>
+                                            </select>
+                                            <div class="text-center">
+                                                <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                                <button type="submit" name="atualizar" class="btn btn-outline-success"><i class="bi bi-arrow-repeat"></i> Salvar</button>
+                                            </div>
+                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>                       
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
+
+                            <!-- Botão DELETAR usuário -->
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalDeletar<?php echo $user['id']; ?>">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <!-- Modal Deletar -->
+                            <div class="modal" id="modalDeletar<?php echo $user['id']; ?>" tabindex="-1" aria-labelledby="modalDeletarLabel<?php echo $user['id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content text-center">
+                                        <div class="modal-header bg-danger text-white text-center">
+                                            <h5 class="modal-title  w-100" id="modalDeletarLabel<?php echo $user['id']; ?>"> Tem certeza que deseja deletar o usuário?</h5>
+                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="admin_gerenciar_usuarios.php" method="post">
+                                                <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
+                                                <button type="submit" name="deletar" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
+                                            </form>    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
         </table>
     </div>
 </section>
