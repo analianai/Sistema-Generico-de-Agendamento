@@ -3,7 +3,7 @@ session_start();
 
 // verifica a conexão por nivel de acesso
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
-    header("Location: ../sing_in.php?error=Acesso negado.");
+    header("Location: ../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -73,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
 // Consulta para visualizar os agendamentos do usuário
 $user_id = $_SESSION['user_id'];  // O ID do usuário logado
 
@@ -95,7 +94,6 @@ $resultCategorias = $mysqli->query($queryCategorias);
 // Consulta os serviços para exibir no formulário
 $queryServicos = "SELECT * FROM servicos";
 $resultServicos = $mysqli->query($queryServicos);
-
 
 ?>
 <!DOCTYPE html>

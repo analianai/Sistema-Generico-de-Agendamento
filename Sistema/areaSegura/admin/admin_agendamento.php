@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['username']) || ($_SESSION['nivel_acesso'] != 0 && $_SESSION['nivel_acesso'] != 1)) {
-    header("Location: ../../sing_in.php?error=Acesso negado.");
+    header("Location: ../../sign_in.php?error=Acesso negado.");
     exit;
 }
 

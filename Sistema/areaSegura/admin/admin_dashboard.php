@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
-    header("Location: ../../sing_in.php?error=Acesso negado.");
+    header("Location: ../../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -66,8 +66,7 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
             </div>
         </div>     
     </section>
-    <!-- Historicos do agendamento dos ultimos 7 dias-->
-         <!-- Historico de Agendamento-->
+    <!-- Historicos do agendamento-->
     <section id="Hitorico">
         <div class="container mt-3 mb-5">
             <div class="mt-2 mb-4">

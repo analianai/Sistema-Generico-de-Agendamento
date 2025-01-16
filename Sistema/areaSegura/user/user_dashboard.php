@@ -3,7 +3,7 @@ session_start();
 
 // verifica a conexão por nivel de acesso
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
-    header("Location: ../sing_in.php?error=Acesso negado.");
+    header("Location: ../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -42,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['inserir'])) {
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
-
 
 // Função de exclusão
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {

@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 0) {
-    header("Location: ../sing_in.php?error=Acesso negado.");
+    header("Location: ../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -26,6 +26,8 @@ $result_categorias = $mysqli->query($query_categorias);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Inclui o mensagem de erro -->
+    <?php include '../../componentes/erro.php'; ?>
     <!-- memu -->
     <?php include '../../componentes/menuSeguro.php'; ?>
 

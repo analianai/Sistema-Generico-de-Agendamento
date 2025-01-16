@@ -4,7 +4,7 @@ session_start();
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
-    header("Location: ../../sing_in.php?error=Acesso negado.");
+    header("Location: ../../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -97,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['senha_atual'], $_POST
     echo "Nenhum POST recebido.";
 }
 
-
 //Atualizar Perfil
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nome'], $_POST['sobrenome'], $_POST['celular'], $_POST['whatsapp'], $_POST['endereco'], $_POST['estado'], $_POST['cidade'], $_POST['cpf'], $_POST['data_nascimento'], $_POST['username'])) {
     $nome = trim($_POST['nome']);
@@ -150,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['excluir_perfil'])) {
     if ($stmt->execute()) {
         // Encerra a sessão e redireciona para a página de login
         session_destroy();
-        header("Location: ../../sing_in.php?mensagem_sucesso=Perfil excluído com sucesso.");
+        header("Location: ../../index.php?mensagem_sucesso=Perfil excluído com sucesso.");
     } else {
         die("Erro ao executar a consulta: " . $stmt->error);
     }

@@ -3,7 +3,7 @@ session_start();
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
-    header("Location: ../../sing_in.php?error=Acesso negado.");
+    header("Location: ../../sign_in.php?error=Acesso negado.");
     exit;
 }
 
@@ -95,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
 }
 
 // Função de alteração de status
-// Função de alteração de status
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status'])) {
     $depoimento_id = intval($_POST['depoimento_id']);
     
@@ -133,8 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['alterar_status'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
-
-
 
 $cont = 0;
 // Fecha a conexão com o banco de dados
