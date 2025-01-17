@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             // Upload da imagem
             $imagem = '';
             if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-                $uploadDir = '../../assets/uploads/';
-                $imagem = $uploadDir . basename($_FILES['imagem']['name']);
+                $uploadDir = 'uploads/';
+                $imagem = $uploadDir. basename($_FILES['imagem']['name']);
                 move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
             }
     
@@ -43,8 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } else {
         $_SESSION['mensagem_erro'] = 'Erro ao cadastrar o serviço!';
     }
-    
-    if ($action === 'update') {
+}
+
+//atualizar
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionUpdate'])) {
+    $action = $_POST['actionUpdate'];
+    //atualizar
+    if ($action === 'actionUpdate') {
         $id = $_POST['id'];
         $codigo_servico = $_POST['codigo'];
         $titulo = $_POST['titulo'];
@@ -57,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         // Atualizar imagem se necessário
         $imagem = $_POST['existing_imagem'];
         if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-            $uploadDir = '../../assets/uploads/';
+            $uploadDir = 'uploads/';
             $imagem = $uploadDir . basename($_FILES['imagem']['name']);
             move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
         }
@@ -75,8 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $_SESSION['mensagem_erro'] = 'Erro ao atualizar o serviço!';
     }
 
+}
+
+// deletar serviços
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionDelete'])) {
+    $action = $_POST['actionDelete'];
     // deletar serviços
-    if ($action === 'delete') {
+    if ($action === 'actionDelete') {
         $id = $_POST['id'];
 
         // Deletar do BD
@@ -86,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
         $_SESSION['mensagem_sucesso'] = 'Serviço Deletado com sucesso!';
 
-    } else{
+    } else {
         $_SESSION['mensagem_erro'] = 'Erro ao deletar o serviço!';
     }
 

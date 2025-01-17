@@ -186,12 +186,14 @@ $mysqli->close();
 
     <!--Depoimentos-->
     <section class="container mt-4">
-        <div class="mt-2 mb-2">
-            <h4><i class="bi bi-megaphone"></i> Depoimentos</h4>
+        <div id="cabecalho" class="container mb-4">
+            <div class="mt-5 d-flex justify-content-between">
+                <h4><i class="bi bi-megaphone"></i> Depoimentos</h4>
+                <a type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#depoimentosModal">
+                    <i class="bi bi-plus"></i> Novo Depoimento
+                </a>           
+            </div>
             <hr>
-            <button type="button" class="btn text-primary mb-4" data-bs-toggle="modal" data-bs-target="#depoimentosModal">
-                <i class="bi bi-plus"></i> Novo Depoimento
-            </button>
         </div>
         <div class="mt-1">
             <?php if (!empty($depoimentos)): ?>
@@ -222,7 +224,8 @@ $mysqli->close();
                                                     <div class="modal-body">
                                                         <form action="" method="post">
                                                             <input type="hidden" name="depoimento_id" value="<?= $depoimento['id'] ?>">
-                                                            <textarea class="form-control" name="comentario" rows="3" maxlength="90"><?= htmlspecialchars($depoimento['comentario']) ?></textarea>
+                                                            <textarea class="form-control" id="comentario" name="comentario" rows="x" maxlength="90"><?= htmlspecialchars($depoimento['comentario']) ?></textarea>
+                                                            <div id="contador">90/90</div>
                                                             <div class="mt-3 text-center">
                                                                 <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
                                                                 <button type="submit" name="update" class="btn btn-outline-primary"><i class="bi bi-arrow-repeat"></i> Salvar</button>
@@ -276,7 +279,8 @@ $mysqli->close();
                     <div class="modal-body">
                         <form action="" method="post" novalidate>
                             <div class="mb-3">
-                                <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Escreva seu depoimento"></textarea>
+                                <textarea class="form-control" id="comentario" name="comentario" rows="x" maxlength="90" placeholder="Escreva seu depoimento"></textarea>
+                                <div id="contador">90/90</div>
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-outline-danger me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
@@ -346,5 +350,14 @@ $mysqli->close();
     </section>
 
     <?php include '../../componentes/footerSeguro.php'; ?>
+    <script>
+        $("#comentario").keyup(function(){
+            if($(this).val().length >= 90){
+                $(this).val( $(this).val().substr(0, 90) );
+            } else {
+                $("#contador").text(90-$(this).val().length+"/90");
+            }
+        });
+    </script>
 </body>
 </html>

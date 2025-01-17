@@ -48,11 +48,14 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
             <a href="admin_dashboard.php" type="button" class="btn-close pt-5 mt-4" aria-label="Close"></a>
         </div>
         <hr>
-        <!-- Button NOVA categoria e Serviço -->
+        <!-- Button NOVA categoria, visualizar categoria e Serviço -->
          <div class="row mb-4">
             <div class="col-md-6">
                 <button type="button" class="btn text-primary mb-4" data-bs-toggle="modal" data-bs-target="#NovaCategoriaModal">
                     <i class="bi bi-plus"></i> Nova Categoria
+                </button>
+                <button type="button" class="btn text-primary mb-4" data-bs-toggle="modal" data-bs-target="#VisualizarNovaCategoriaModal">
+                    <i class="bi bi-plus"></i> Visualizar Categoria
                 </button>
                 <button type="button" class="btn text-primary mb-4" data-bs-toggle="modal" data-bs-target="#NovoServico">
                     <i class="bi bi-plus"></i> Novo Serviço
@@ -62,6 +65,91 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                 <button type="button" class="btn btn-outline-primary mb-4" data-bs-toggle="modal" data-bs-target="#NovoServico">
                     <i class="bi bi-plus-lg"></i>
                 </button>
+            </div>
+        </div> 
+
+        <!-- Visualizar Categoria Modal -->
+        <div class="modal fade" id="VisualizarNovaCategoriaModal" tabindex="-1" aria-labelledby="VisualizarNovaCategoriaModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="VisualizarNovaCategoriaModal"><i class="bi bi-card-checklist"></i> Categorias</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Tabela de Categorias -->
+                        <div class="d-flex justify-content-center">
+                            <table class="table table-bordered table-hover mt-2 w-75">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>#</th>
+                                        <th>Categoria</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($categorias as $index => $categoria): ?>
+                                    <tr class="text-center">
+                                        <td><?= $index + 1 ?></td>
+                                        <td><?= htmlspecialchars($categoria['nome']) ?></td>
+                                        <td>
+                                            <!-- Formulário de Atualização -->
+                                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#atualizar<?= $categoria['cat_id'] ?>">
+                                                <i class="bi bi-arrow-repeat fs-5"></i>
+                                            </button>
+                                            <!-- Modal Atualizar Categoria-->
+                                            <div class="modal fade" id="atualizar<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="atualizarLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-success text-white text-center">
+                                                            <h4 class="modal-title w-100 fs-5" id="atualizarLabel">Atualize a categoria <?= htmlspecialchars($categoria['nome']) ?></h4>
+                                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" action="" class="d-inline">
+                                                                <input type="hidden" name="action1" value="update_categoria">
+                                                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
+                                                                <input type="text" name="cat_nome" class="form-control" placeholder="Novo Nome" value="<?= htmlspecialchars($categoria['nome']) ?>" required>
+                                                                <button type="button" class="btn btn-outline-danger mt-3 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                                                <button type="submit" class="btn btn-outline-success mt-3"><i class="bi bi-arrow-repeat"></i> Salvar</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Formulário de Exclusão -->
+                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#excluir<?= $categoria['cat_id'] ?>">
+                                                <i class="bi bi-trash fs-5"></i>
+                                            </button>
+                                            <!-- Modal Excluir Categoria-->
+                                            <div class="modal fade" id="excluir<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="excluirLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-danger text-white text-center">
+                                                            <h5 class="modal-title w-100 fs-5" id="excluirLabel">Deseja excluir a categoria <?= htmlspecialchars($categoria['nome']) ?> ? </h5>
+                                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form method="POST" action1="" class="d-inline">
+                                                                <input type="hidden" name="action1" value="delete_categoria">
+                                                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
+                                                                <button type="button" class="btn btn-outline-success me-2" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
+                                                                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Nova Categoria Modal -->
@@ -93,7 +181,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
         </div>
           <!-- Modal NOVO Serviço -->
         <div class="modal fade" id="NovoServico" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <div class="modal-header text-center">
                     <h1 class="modal-title w-100 fs-5" id="NovoServicoLabel">Novo Serviço</h1>
@@ -149,85 +237,9 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
             </div>
         </div>                             
     </section>
-
-    <!--Categorias-->      
-    <section class="container">
-        <h4 class="pt-2"><i class="bi bi-card-checklist"></i> Categorias</h4>
-        <hr>
-        <!-- Tabela de Categorias -->
-        <div class="d-flex justify-content-center">
-            <table class="table table-bordered table-hover mt-2 w-75">
-                <thead>
-                    <tr class="text-center">
-                        <th>#</th>
-                        <th>Categoria</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($categorias as $index => $categoria): ?>
-                    <tr class="text-center">
-                        <td><?= $index + 1 ?></td>
-                        <td><?= htmlspecialchars($categoria['nome']) ?></td>
-                        <td>
-                            <!-- Formulário de Atualização -->
-                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#atualizar<?= $categoria['cat_id'] ?>">
-                                <i class="bi bi-arrow-repeat fs-5"></i>
-                            </button>
-                            <!-- Modal Atualizar Categoria-->
-                            <div class="modal fade" id="atualizar<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="atualizarLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header bg-success text-white text-center">
-                                        <h4 class="modal-title w-100 fs-5" id="atualizarLabel">Atualize a categoria <?= htmlspecialchars($categoria['nome']) ?></h4>
-                                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="POST" action="" class="d-inline">
-                                            <input type="hidden" name="action1" value="update_categoria">
-                                            <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
-                                            <input type="text" name="cat_nome" class="form-control" placeholder="Novo Nome" value="<?= htmlspecialchars($categoria['nome']) ?>" required>
-                                            <button type="button" class="btn btn-outline-danger mt-3 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
-                                            <button type="submit" class="btn btn-outline-success mt-3"><i class="bi bi-arrow-repeat"></i> Salvar</button>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Formulário de Exclusão -->
-                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#excluir<?= $categoria['cat_id'] ?>">
-                                <i class="bi bi-trash fs-5"></i>
-                            </button>
-                            <!-- Modal Excluir Categoria-->
-                            <div class="modal fade" id="excluir<?= $categoria['cat_id'] ?>" tabindex="-1" aria-labelledby="excluirLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger text-white text-center">
-                                            <h5 class="modal-title w-100 fs-5" id="excluirLabel">Deseja excluir a categoria <?= htmlspecialchars($categoria['nome']) ?> ? </h5>
-                                            <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action1="" class="d-inline">
-                                                <input type="hidden" name="action1" value="delete_categoria">
-                                                <input type="hidden" name="cat_id" value="<?= htmlspecialchars($categoria['cat_id']) ?>">
-                                                <button type="button" class="btn btn-outline-success me-2" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
-                                                <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Excluir</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
                         
     <!--Serviços por categorias--> 
-    <section id="admin_servicos" class="container pt-5 ">
+    <section id="admin_servicos" class="container pt-2 ">
         <?php 
         // Organizar serviços por categorias
         $categorias_servicos = [];
@@ -239,7 +251,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
 
         <?php foreach ($categorias_servicos as $categoria => $servicos): ?>
             <div class="mb-4">
-                <h4 class="card-text"><i class="bi bi-bookmark-plus"></i> Serviço de <?= htmlspecialchars($categoria) ?></h4>
+                <h4 class="card-text"><i class="bi bi-bookmark-plus"></i> Categoria <?= htmlspecialchars($categoria) ?></h4>
                 <hr class="mb-4">
                 <div class="row mt-3">
                     <?php foreach ($servicos as $servico): ?>
@@ -276,7 +288,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                                     </div>
                                     <div class="modal-body">
                                         <form action="" method="POST" enctype="multipart/form-data" class="row">
-                                            <input type="hidden" name="action" value="update">
+                                            <input type="hidden" name="actionUpdate" value="actionUpdate">
                                             <input type="hidden" name="id" value="<?= $servico['id'] ?>">
                                             <input type="hidden" name="existing_imagem" value="<?= htmlspecialchars($servico['imagem']) ?>">
 
@@ -360,7 +372,7 @@ $mysqli = new mysqli("localhost", "root", "", "salao");
                                     <div class="modal-body text-center">                                   
                                         <button type="button" class="btn btn-outline-success mt-4 me-3" data-bs-dismiss="modal"><i class="bi bi-backspace-fill"></i> Voltar</button>
                                         <form action="" method="POST" style="display:inline;">
-                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="actionDelete" value="actionDelete">
                                             <input type="hidden" name="id" value="<?= $servico['id'] ?>">
                                             <button type="submit" class="btn btn-outline-danger mt-4"><i class="bi bi-trash"></i> Sim</button>
                                         </form>

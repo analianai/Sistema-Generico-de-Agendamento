@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// conexão ao banco de dados
+$mysqli = new mysqli("localhost", "root", "", "salao");
+
+// Consultar categorias e serviços
+$query_categorias = "SELECT cat_id, nome FROM categorias";
+$result_categorias = $mysqli->query($query_categorias);
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,208 +35,45 @@
     </section>
   
     <!-- Serviços Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/fotos.webp" height="275" class="card-img-top" alt="Corte de Cabelo">
-                        <div class="card-body">
-                            <h5 class="card-title">Corte de Cabelo</h5>
-                            <p class="card-text">Cortes modernos e personalizados para realçar sua identidade.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalCorteCabelo">Saiba mais</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/pintura.jpg" height="275" class="card-img-top" alt="Coloração">
-                        <div class="card-body">
-                            <h5 class="card-title">Coloração</h5>
-                            <p class="card-text">Cores vibrantes e saudáveis para transformar seu visual.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalColoracao">Saiba mais</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/manicure.webp" height="275" class="card-img-top" alt="Manicure e Pedicure">
-                        <div class="card-body">
-                            <h5 class="card-title">Manicure e Pedicure</h5>
-                            <p class="card-text">Cuidado completo para suas unhas, com esmaltações perfeitas.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalManicure">Saiba mais</button>
-                        </div>
+    <section class="container">
+    <?php while ($categoria = $result_categorias->fetch_assoc()) { 
+            $categoria_id = $categoria['cat_id'];
+            $query_servicos = "SELECT titulo, descricao, codigo, duracao, valor, observacao, imagem FROM servicos WHERE categoria_id = $categoria_id";
+            $result_servicos = $mysqli->query($query_servicos);
+        ?>
+        <h4 class="mt-4 mb-4"><i class="bi bi-bookmark"></i> <?php echo htmlspecialchars($categoria['nome']); ?></h4>
+        <div class="row">
+            <?php while ($servico = $result_servicos->fetch_assoc()) { ?>
+            <div class="col-md-3">
+                <div class="card mb-2 shadow-sm">
+                    <img src="areaSegura/admin/<?php echo htmlspecialchars($servico['imagem']); ?>" class="card-img-top" style="height:220px;" alt="Imagem do Serviço">
+                    <div class="card-body" style="height:250px;">
+                        <h5 class="card-title text-center"><?php echo htmlspecialchars($servico['titulo']); ?></h5>
+                        <p class="card-text">
+                            <b>Descrição:</b> <?php echo htmlspecialchars($servico['descricao']); ?>
+                        </p>
+                        <p class="card-text d-flex justify-content-start">
+                            <b>Duração: </b><?php echo htmlspecialchars($servico['duracao']); ?> minutos
+                        </p>
+                        <p class="card-text text-center">            
+                            <a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#agendamentoModal" data-bs-dismiss="modal">Entre</a>
+                            ou 
+                            <a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#cadastroModal" data-bs-dismiss="modal">Cadastre-se</a>
+                             <br> Para agendar seu atendimento.
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/luzes.png"  height="275" class="card-img-top" alt="Tratamento Capilar">
-                        <div class="card-body">
-                            <h5 class="card-title">Tratamento Capilar</h5>
-                            <p class="card-text">Hidratações e tratamentos para manter seus cabelos saudáveis.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalTratamentoCapilar">Saiba mais</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/makes.jpg"  height="275" class="card-img-top" alt="Maquiagem">
-                        <div class="card-body">
-                            <h5 class="card-title">Maquiagem</h5>
-                            <p class="card-text">Makeup profissional para ocasiões especiais ou do dia a dia.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalMaquiagem">Saiba mais</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="./assets/img/depilacao.webp"  height="275" class="card-img-top" alt="Depilação">
-                        <div class="card-body">
-                            <h5 class="card-title">Depilação</h5>
-                            <p class="card-text">Técnicas modernas e eficazes para uma pele lisa e macia.</p>
-                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#modalDepilacao">Saiba mais</button>
-                        </div>
-                    </div>
-                </div>
+            <?php } ?>
+            <?php if ($result_servicos->num_rows == 0) { ?>
+            <div class="col-12">
+                <p>Nenhum serviço disponível nesta categoria.</p>
             </div>
+            <?php } ?>
         </div>
+        <?php } ?>
     </section>
-
-    <!-- Modals -->
-    <div class="modal fade" id="modalCorteCabelo" tabindex="-1" aria-labelledby="modalCorteCabeloLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCorteCabeloLabel">Corte de Cabelo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Nosso corte de cabelo é realizado por profissionais altamente qualificados, utilizando técnicas modernas e equipamentos de última geração. Seja qual for o seu estilo, garantimos um corte que combine perfeitamente com sua personalidade e preferências.</p>
-                    <ul>
-                        <li>Cortes masculinos e femininos</li>
-                        <li>Cortes infantis</li>
-                        <li>Modelagem e finalização incluídas</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalColoracao" tabindex="-1" aria-labelledby="modalColoracaoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalColoracaoLabel">Coloração</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Nossos serviços de coloração oferecem tinturas de alta qualidade que mantêm seus cabelos saudáveis e brilhantes. Escolha entre uma ampla gama de cores e estilos.</p>
-                    <ul>
-                        <li>Coloração permanente e semi-permanente</li>
-                        <li>Mechas, luzes e balayage</li>
-                        <li>Correção de cor</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalManicure" tabindex="-1" aria-labelledby="modalManicureLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalManicureLabel">Manicure e Pedicure</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Oferecemos serviços de manicure e pedicure com os melhores produtos e técnicas. Deixe suas unhas lindas e bem cuidadas.</p>
-                    <ul>
-                        <li>Esmaltações tradicionais e em gel</li>
-                        <li>Hidratação e esfoliação</li>
-                        <li>Design de unhas personalizadas</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalTratamentoCapilar" tabindex="-1" aria-labelledby="modalTratamentoCapilarLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTratamentoCapilarLabel">Tratamento Capilar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Tratamentos capilares personalizados para hidratar, fortalecer e revitalizar seus cabelos.</p>
-                    <ul>
-                        <li>Hidratação profunda</li>
-                        <li>Reconstrução capilar</li>
-                        <li>Tratamentos antiqueda</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalMaquiagem" tabindex="-1" aria-labelledby="modalMaquiagemLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalMaquiagemLabel">Maquiagem</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Realce sua beleza com maquiagens feitas por profissionais para qualquer ocasião.</p>
-                    <ul>
-                        <li>Maquiagem para festas e eventos</li>
-                        <li>Maquiagem social</li>
-                        <li>Contorno e iluminação profissionais</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalDepilacao" tabindex="-1" aria-labelledby="modalDepilacaoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalDepilacaoLabel">Depilação</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Depilações rápidas e eficazes com técnicas avançadas para uma pele macia e lisa.</p>
-                    <ul>
-                        <li>Depilação com cera quente ou fria</li>
-                        <li>Depilação a laser</li>
-                        <li>Hidratação pós-depilação</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+ 
     <!-- Footer -->
     <?php include './componentes/footer.php'; ?>    
 </body>

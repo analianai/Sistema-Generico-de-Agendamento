@@ -50,7 +50,7 @@ $result_categorias = $mysqli->query($query_categorias);
             <?php while ($servico = $result_servicos->fetch_assoc()) { ?>
             <div class="col-md-3">
                 <div class="card mb-3 shadow-sm">
-                    <img src="<?php echo htmlspecialchars($servico['imagem']); ?>" class="card-img-top" style="height:220px;" alt="Imagem do Serviço">
+                    <img src="../admin/<?php echo htmlspecialchars($servico['imagem']); ?>" class="card-img-top" style="height:220px;" alt="Imagem do Serviço">
                     <div class="card-body" style="height:200px;">
                         <h5 class="card-title text-center"><?php echo htmlspecialchars($servico['titulo']); ?></h5>
                         <p class="card-text">
