@@ -5,7 +5,7 @@ session_start();
 $mysqli = new mysqli("localhost", "root", "", "salao");
 
 // Consultar categorias e serviços
-$query_categorias = "SELECT cat_id, nome FROM categorias";
+$query_categorias = "SELECT cat_id, nome FROM categorias ORDER BY nome ASC";
 $result_categorias = $mysqli->query($query_categorias);
 
 ?>

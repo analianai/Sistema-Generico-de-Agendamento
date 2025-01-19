@@ -20,8 +20,9 @@ CREATE TABLE usuarios (
 -- Criação da tabela de categorias
 CREATE TABLE categorias (
     cat_id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
-) 
+    nome VARCHAR(255) NOT NULL,
+    imagem VARCHAR(255) AFTER nome
+);
 
 CREATE TABLE servicos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -64,3 +65,35 @@ CREATE TABLE depoimentos (
     data_aprovacao TIMESTAMP NULL DEFAULT NULL,  -- Data da aprovação (nula até aprovação)
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
+
+--ususarios---
+INSERT INTO usuarios (
+    nome, sobrenome, username, celular, whatsapp, endereco, estado, cidade, cpf, data_nascimento, password_hash, nivel_acesso
+) VALUES 
+    ('João', 'Silva', 'joao.silva@email.com', '11999998888', '11999998888', 'Rua das Flores, 123', 'SP', 'São Paulo', '123.456.789-00', '1990-01-01', 'senha_hash_aqui', 0),
+    ('Analia', 'Souza', 'nai@email.com', '21988887777', '21988887777', 'Av. Central, 456', 'RJ', 'Rio de Janeiro', '987.654.321-00', '1992-05-10', 'senha_hash_aqui', 1),
+    ('Carlos', 'Santos', 'carlos.santos@email.com', '31977776666', '31977776666', 'Praça das Árvores, 789', 'MG', 'Belo Horizonte', '456.123.789-00', '1985-07-20', 'senha_hash_aqui', 0);
+
+INSERT INTO depoimentos (
+    user_id, comentario, aprovacao
+) VALUES
+    (1, 'Excelente serviço, super recomendo! A equipe é muito atenciosa e eficiente.', 1),
+    (1, 'O atendimento poderia ser um pouco mais rápido, mas no geral gostei bastante do trabalho realizado.', 1),
+    (2, 'Atendimento maravilhoso e os resultados são impressionantes. Parabéns a toda equipe!', 1),
+    (2, 'Fiquei satisfeita com o serviço prestado, porém o preço estava um pouco alto.', 0),
+    (3, 'O serviço atendeu todas as minhas expectativas. A qualidade foi acima do esperado!', 1),
+    (3, 'Infelizmente tive um problema com o prazo de entrega, mas o suporte me ajudou rapidamente.', 0),
+    (1, 'Adorei o resultado final! Super indico para quem precisa de soluções rápidas e eficazes.', 1),
+    (1, 'O produto entregou o que prometeu, mas poderia ter sido mais personalizável. No geral, bom serviço.', 0),
+    (2, 'Incrível! Me ajudaram em todos os detalhes e o resultado foi além das expectativas.', 1),
+    (2, 'Achei que a comunicação poderia ser mais clara, mas no final consegui o que precisava.', 0),
+    (3, 'Serviço de excelente qualidade, me surpreendeu! Com certeza voltarei a utilizar.', 1),
+    (3, 'O tempo de resposta foi um pouco demorado, mas a solução apresentada foi boa.', 0),
+    (1, 'Simplesmente perfeito. O atendimento foi nota 10 e o serviço atendeu a todas as minhas necessidades.', 1),
+    (1, 'A equipe foi muito educada, mas o serviço demorou mais do que eu esperava.', 0),
+    (2, 'A experiência foi ótima, mas ainda há alguns detalhes a serem ajustados.', 0),
+    (2, 'Recomendo o serviço, eles são rápidos e eficientes. Fiquei muito satisfeita com o atendimento!', 1),
+    (3, 'Apesar de alguns contratempos, o suporte foi impecável. Aprovado!', 0),
+    (3, 'O serviço foi rápido e eficiente, exatamente como eu precisava. Muito bom!', 1),
+    (1, 'Uma excelente experiência de compra. O serviço foi de alta qualidade e o preço justo.', 1),
+    (2, 'Embora o serviço tenha demorado um pouco, valeu muito a pena. Recomendaria sem dúvidas.', 0);

@@ -32,6 +32,15 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
             border-color: #6f42c1;
             background-color: #6f42c1;
         }
+        .btn-outline-verde{
+            color:rgb(28, 229, 28);
+            border-color: rgb(28, 229, 28);
+        }
+        .btn-outline-verde:hover{
+            color: #fff;
+            border-color: rgb(28, 229, 28);
+            background-color: rgb(28, 229, 28);
+        }
     </style>
 </head>
 <body>
@@ -47,13 +56,10 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
      <section id="buttons" class="container">
         <div class="row align-items-start text-center">
             <div class="col">
-                <button onclick="window.location.href='admin_servicos.php'" type="button" class="btn btn-outline-lilas mb-3 tamanho"><i class="bi bi-house-gear-fill fs-2"></i><br>Serviços</button>
+                <button onclick="window.location.href='admin_gerenciar_site.php'" type="button" class="btn btn-outline-lilas mb-3 tamanho"><i class="bi bi-globe fs-2"></i><br>Gerenciar Site</button>
             </div>
             <div class="col">
                 <button onclick="window.location.href='admin_relatorio.php'" type="button" class="btn btn-outline-primary mb-3 tamanho"><i class="bi bi-graph-up-arrow fs-2"></i><br>Relatórios</button>
-            </div>
-            <div class="col">
-                <button  onclick="window.location.href='admin_depoimentos.php'" type="button" class="btn btn-outline-warning mb-3 tamanho"><i class="bi bi-megaphone fs-2"></i> <br>Depoimentos</button>
             </div>
             <div class="col">
                 <button  onclick="window.location.href='admin_gerenciar_usuarios.php'" type="button" class="btn btn-outline-info mb-3 tamanho"><i class="bi bi-person-fill-gear fs-2"></i><br>Gerenciar Usuários</button>

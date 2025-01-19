@@ -7,8 +7,10 @@ if ($mysqli->connect_error) {
     die("Erro ao conectar ao banco de dados: " . $mysqli->connect_error);
 }
 
+//VISUALIZAR DEPOIMENTOS
+
 // Consulta para pegar os 6 últimos depoimentos aprovados (ordenados pela data de aprovação)
-$query = "
+$queryDepoimentos = "
     SELECT usuarios.nome, depoimentos.comentario
     FROM depoimentos
     INNER JOIN usuarios ON depoimentos.user_id = usuarios.id
@@ -17,7 +19,7 @@ $query = "
     LIMIT 6
 ";
 
-$result = $mysqli->query($query);
+$result = $mysqli->query($queryDepoimentos);
 
 if (!$result) {
     die("Erro ao executar a consulta: " . $mysqli->error);
@@ -26,6 +28,28 @@ if (!$result) {
 $depoimentos = [];
 while ($row = $result->fetch_assoc()) {
     $depoimentos[] = $row;
+}
+
+
+//VISUALIZAR CATEGORIAS
+// Consulta para pegar a 3 últimos categorias
+$queryCategorias = "
+    SELECT 
+    cat_id, nome,imagem 
+    FROM categorias
+    ORDER BY nome ASC
+    LIMIT 3 
+";
+
+$resultCategorias = $mysqli->query($queryCategorias);
+
+if (!$resultCategorias) {
+    die("Erro ao executar a consulta: " . $mysqli->error);
+}
+
+$categorias = [];
+while ($row = $resultCategorias->fetch_assoc()) {
+    $categorias[] = $row;
 }
 
 // Fecha a conexão com o banco de dados
@@ -188,37 +212,19 @@ $mysqli->close();
             <a href="servicos.php" class="text-success text-decoration-none">Saiba Mais</a>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <img src="./assets/img/escova.jpeg" width="300" height="280" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="text-center">Escova</h3>
-                        <p class="card-text">Uma escova para cada tipo de cabelo.</p>
-                        <a href="servicos.php"  class="btn btn-success w-100">Saiba mais</a>
+            <?php foreach ($categorias as $categoria): ?>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="areaSegura/admin/uploads/categorias/<?= htmlspecialchars($categoria['imagem']); ?>" width="300" height="280" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h3 class="text-center"><?= htmlspecialchars($categoria['nome']); ?></h3>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <img src="assets/img/manicure.webp" width="300" height="280" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="text-center">Manicure e Pedicure</h3>
-                        <p class="card-text">Detalhes sobre serviços exclusivos.</p>
-                        <a href="servicos.php" class="btn btn-success w-100">Saiba mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <img src="assets/img/makes.jpg" width="300" height="280" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="text-center">Makes</h3>
-                        <p class="card-text">Detalhes sobre serviços exclusivos.</p>
-                        <button class="btn btn-success w-100">Saiba mais</button>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
+        <a href="servicos.php"  class="btn btn-success w-100">Saiba mais</a>
     </section>
     <!-- Localização Section -->
     <section id="localizacao" class="container py-5">
