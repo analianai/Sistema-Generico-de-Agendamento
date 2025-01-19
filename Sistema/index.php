@@ -52,6 +52,14 @@ while ($row = $resultCategorias->fetch_assoc()) {
     $categorias[] = $row;
 }
 
+$carousel = [];
+while ($row = $resultCategorias->fetch_assoc()) {
+    $carousel[] = $row;
+}
+
+//Carousel
+$resultCarousel = $mysqli->query("SELECT * FROM carousel_slides");
+
 // Fecha a conexão com o banco de dados
 $mysqli->close();
 ?>
@@ -73,46 +81,7 @@ $mysqli->close();
     <!-- Navbar -->
     <?php include './componentes/menu.php'; ?>
     <!-- carousel Section -->
-    <div class="container-fluid p-0">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="assets/img/01.jpg" class="d-block w-100 filter-darken" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 class="sombra-simples">Bem-vindo ao Salão de Beleza</h1>
-                        <p>Cuidamos de você com amor e dedicação!</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/02.webp" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 class="sombra-simples">Transforme-se</h1>
-                        <p>Com os melhores profissionais e serviços.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/03.jpg" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 class="sombra-simples">Seu estilo, nossa paixão</h1>
-                        <p>Visite-nos e confira!</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
+    <?php include './componentes/carrousel.php'; ?>
     
     <!-- Sobre Section -->
     <section id="sobreNos" class="container py-5">

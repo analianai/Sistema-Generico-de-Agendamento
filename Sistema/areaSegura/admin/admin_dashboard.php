@@ -41,6 +41,15 @@ if (!isset($_SESSION['username']) || $_SESSION['nivel_acesso'] != 1) {
             border-color: rgb(28, 229, 28);
             background-color: rgb(28, 229, 28);
         }
+        #mensagem-sucesso, #mensagem-erro {
+            position: fixed; /* Fixar a mensagem no topo da página */
+            top: 20px; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição centralizada */
+            z-index: 1050; /* Garante que a mensagem esteja acima de outros elementos */
+            width: auto; /* Ajusta largura */
+            max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
+        }
     </style>
 </head>
 <body>

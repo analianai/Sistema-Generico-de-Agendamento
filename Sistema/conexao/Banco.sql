@@ -66,6 +66,15 @@ CREATE TABLE depoimentos (
     FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
+CREATE TABLE carousel_slides (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_path VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    active BOOLEAN DEFAULT FALSE,
+);
+
+
 --ususarios---
 INSERT INTO usuarios (
     nome, sobrenome, username, celular, whatsapp, endereco, estado, cidade, cpf, data_nascimento, password_hash, nivel_acesso

@@ -82,7 +82,7 @@ if ($mysqli->connect_error) {
                     </div>
                     <div class="modal-body">
                         <form action="" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="actionCategoria" value="add">
+                            <input type="hidden" name="actionCategoria" value="add">
                             <div class="mb-3">
                                 <input type="text" class="form-control" id="nova_categoria" name="nova_categoria" placeholder="Insira o nome da nova categoria" required>
                             </div>

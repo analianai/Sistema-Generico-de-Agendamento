@@ -101,6 +101,17 @@ $resultServicos = $mysqli->query($queryServicos);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap css Icons-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+         #mensagem-sucesso, #mensagem-erro {
+            position: fixed; /* Fixar a mensagem no topo da página */
+            top: 20px; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição centralizada */
+            z-index: 1050; /* Garante que a mensagem esteja acima de outros elementos */
+            width: auto; /* Ajusta largura */
+            max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
+        }
+    </style>
 </head>
 <body>
     <!-- erro -->
