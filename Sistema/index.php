@@ -52,6 +52,8 @@ while ($row = $resultCategorias->fetch_assoc()) {
     $categorias[] = $row;
 }
 
+// CAROUSEL
+
 $carousel = [];
 while ($row = $resultCategorias->fetch_assoc()) {
     $carousel[] = $row;
@@ -59,6 +61,25 @@ while ($row = $resultCategorias->fetch_assoc()) {
 
 //Carousel
 $resultCarousel = $mysqli->query("SELECT * FROM carousel_slides");
+
+//localização
+
+// Busca os dados de localização
+$queryLocalizacao = "
+        SELECT 
+        telefone,
+        email,
+        endereco, 
+        mapa 
+        FROM 
+        localizacao 
+        LIMIT 1";
+$resultLocalizacao = $mysqli->query($queryLocalizacao);
+
+$localizacao = [];
+while ($row = $resultLocalizacao->fetch_assoc()) {
+    $localizacao[] = $row;
+}
 
 // Fecha a conexão com o banco de dados
 $mysqli->close();
@@ -173,36 +194,63 @@ $mysqli->close();
         </div>
     </section>
 
-
     <!-- Serviços Section -->
-    <section id="servicos" class="container py-5">
+    <section id="servicos" class="container mt-3">
         <div class="d-flex justify-content-between mb-3">
             <h2>Serviços</h2>
             <a href="servicos.php" class="text-success text-decoration-none">Saiba Mais</a>
         </div>
         <div class="row">
             <?php foreach ($categorias as $categoria): ?>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <img src="areaSegura/admin/uploads/categorias/<?= htmlspecialchars($categoria['imagem']); ?>" width="300" height="280" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h3 class="text-center"><?= htmlspecialchars($categoria['nome']); ?></h3>
-                            
+                    <div class="col-md-4">
+                    <a href="servicos.php" class="text-decoration-none">
+                        <div class="card mb-3">
+                            <img src="areaSegura/admin/uploads/categorias/<?= htmlspecialchars($categoria['imagem']); ?>" width="300" height="280" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h3 class="text-center"><?= htmlspecialchars($categoria['nome']); ?></h3>
+                                
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endforeach; ?>
         </div>
-        <a href="servicos.php"  class="btn btn-success w-100">Saiba mais</a>
+        
     </section>
+
     <!-- Localização Section -->
-    <section id="localizacao" class="container py-5">
-        <h2>Localização</h2>
-        <p>Estamos localizados no coração da cidade, com fácil acesso para todos. Venha nos visitar!</p>
-        <div class="map-responsive">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.8354345097745!2d-122.42169828468128!3d37.77492927975871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064e8f71053%3A0xa7c6f2b5af3a9025!2sSal%C3%A3o%20de%20Beleza!5e0!3m2!1sen!2sbr!4v1686849389846!5m2!1sen!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section id="localizacao" class="container mt-5 mb-5">
+        <div>
+            <h2>Localização</h2>
+            <div class="row mt-5 pt-4">
+                <?php foreach ($localizacao as $local): ?>
+                    <div class="col-md-4">
+                        <div class="">
+                            <h5 class="text-center mb-3 lead"><strong>Entre em Contato</strong></h5>
+                            <p class="lead"><strong>Telefone: </strong><?= htmlspecialchars($local['telefone']); ?></p>
+                            <p class="lead"><strong>Email: </strong><?= htmlspecialchars($local['email']); ?></p>
+                            <p class="lead"><strong>Endereço: </strong><?= htmlspecialchars($local['endereco']); ?></p>  
+                        </div>
+                        <div class="me-5 d-none d-lg-block text-center mb-1 mt-3">
+                            <span>Conecte-se conosco nas redes sociais: </span>
+                        </div>
+                        <div class="me-5 d-none d-lg-block text-center fs-3">
+                            <a href="#" class="me-4 text-reset"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="me-4 text-reset"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="me-4 text-reset"><i class="bi bi-youtube"></i></a>
+                            <a href="#" class="me-4 text-reset"><i class="bi bi-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="map-responsive">
+                            <iframe src="<?= htmlspecialchars($local['mapa']); ?>" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
+    
     <!-- Footer -->
     <?php include './componentes/footer.php'; ?>
 </body>

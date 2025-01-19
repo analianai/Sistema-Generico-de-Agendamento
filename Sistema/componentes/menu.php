@@ -23,6 +23,9 @@
                         <a class="nav-link text-white" href="faq.php">FAQ</a>
                     </li>
                     <li class="nav-item">
+                        <a class="btn nav-link text-white" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                    </li>
+                    <li class="nav-item">
                         <a type="button" class="btn btn-outline-light ms-3" data-bs-toggle="modal" data-bs-target="#agendamentoModal" href="#"><i class="bi bi-box-arrow-in-right"></i> Entrar</a>
                     </li>
                 </ul>

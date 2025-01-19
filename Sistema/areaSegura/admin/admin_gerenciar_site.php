@@ -108,6 +108,20 @@ if (isset($_GET['delete'])) {
 // Recuperar slides
 $result = $mysqli->query("SELECT * FROM carousel_slides");
 
+//LOCALIZAÇÃO  
+
+// Busca os dados de localização
+$sql = "SELECT telefone, email, endereco, mapa FROM localizacao LIMIT 1";
+$result = $mysqli->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    echo json_encode($row);
+} else {
+    echo json_encode(["telefone" => "", "email" => "", "endereco" => "", "mapa" => ""]);
+}
+
+$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -133,6 +147,15 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
             border-color: #6f42c1;
             background-color: #6f42c1;
         }
+        .btn-outline-verde{
+            color:rgb(28, 229, 28);
+            border-color: rgb(28, 229, 28);
+        }
+        .btn-outline-verde:hover{
+            color: #fff;
+            border-color: rgb(28, 229, 28);
+            background-color: rgb(28, 229, 28);
+        }
         .card-img-top {
             height: 200px;
             object-fit: cover;
@@ -142,6 +165,15 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
         }
         #card img{
             height: 200px;
+        }
+        #mensagem-sucesso, #mensagem-erro {
+            position: fixed; /* Fixar a mensagem no topo da página */
+            top: 20px; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição centralizada */
+            z-index: 1050; /* Garante que a mensagem esteja acima de outros elementos */
+            width: auto; /* Ajusta largura */
+            max-width: 80%; /* Evita que a mensagem ocupe toda a tela */
         }
     </style>
 </head>
@@ -157,18 +189,30 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
 
         <div class="row align-items-start text-center">
             <div class="col">
-                <button type="button" class="btn btn-outline-info mb-3 tamanho" data-bs-toggle="modal" data-bs-target="#carouselModal">
+                <button type="button" class="btn btn-outline-verde mb-3 tamanho" data-bs-toggle="modal" data-bs-target="#carouselModal">
                     <i class="bi bi-person-fill-gear fs-2"></i><br> Carousel
                 </button>
             </div>
             <div class="col">
-                <button onclick="" type="button" class="btn btn-outline-lilas mb-3 tamanho"><i class="bi bi-camera-reels fs-2"></i><br> Midia</button>
+                <button type="button" class="btn btn-outline-lilas mb-3 tamanho" data-bs-toggle="modal" data-bs-target="#localizacaoModal">
+                    <i class="bi bi-person-fill-gear fs-2"></i><br> localização
+                </button>
             </div>
             <div class="col">
-                <button onclick="window.location.href='admin_depoimentos.php'" type="button" class="btn btn-outline-primary mb-3 tamanho"><i class="bi bi-megaphone fs-2"></i> <br>Depoimentos</button>
+                <button onclick="" type="button" class="btn btn-outline-primary mb-3 tamanho">
+                    <i class="bi bi-camera-reels fs-2"></i><br> Midia
+                </button>
+            </div>
+ 
+            <div class="col">
+                <button onclick="window.location.href='admin_depoimentos.php'" type="button" class="btn btn-outline-info mb-3 tamanho">
+                    <i class="bi bi-megaphone fs-2"></i> <br>Depoimentos
+                </button>
             </div>
             <div class="col">
-                <button onclick="window.location.href='admin_servicos.php'" type="button" class="btn btn-outline-secondary mb-3 tamanho"><i class="bi bi-house-gear-fill fs-2"></i><br>Serviços</button>
+                <button onclick="window.location.href='admin_servicos.php'" type="button" class="btn btn-outline-secondary mb-3 tamanho">
+                    <i class="bi bi-house-gear-fill fs-2"></i><br>Serviços
+                </button>
             </div>
         </div> 
 
@@ -208,7 +252,7 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
         </div>
     </section>
     <!-- Visualizar imagem do carousel -->
-    <section id="visualizar" class="container">
+    <section id="visualizar_carousel" class="container">
         <div class="mt-5 d-flex justify-content-between">
             <h4 class="pt-5"><i class="bi bi-images"></i> Visualizar imagens do Slide</h4>                       
         </div>
@@ -224,11 +268,11 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
                             <h5 class="card-title text-center"><?php echo htmlspecialchars($row['title']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($row['description']); ?></p>
                             <p class="card-text"><small class="text-muted">Ação: <?php echo $row['active'] ? 'Primeiro Slide' : 'Inativo'; ?></small></p>
-                            <div class="text-center">
+                            <div class="text-center position-absolute bottom-0 mb-2">
                                 <!-- Botão Atualizar -->
-                                <a href="#" class="btn btn-outline-success btn-sm me-3" data-bs-toggle="modal" data-bs-target="#updateCarouselModal<?php echo $row['id']; ?>"><i class="bi bi-arrow-repeat"></i> Atualizar</a>
+                                <a href="#" class="btn btn-outline-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#updateCarouselModal<?php echo $row['id']; ?>"><i class="bi bi-arrow-repeat"></i> Atualizar</a>
                                 <!-- Botão Excluir -->
-                                <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Excluir</a>
+                                <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm " data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Excluir</a>
                             </div>
                         </div>
                     </div>
@@ -280,7 +324,7 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
                         <div class="modal-content">
                             <div class="modal-header text-center bg-danger text-white">
                                 <h3 class="modal-title fs-5 w-100" id="deleteModalLabel">Deseja deletar imagem do slide?</h3>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
                             </div>
                             <div class="modal-body text-center">
                                 <p class="text-danger">*Ao excluir a imagem será definitivo</p>
@@ -295,6 +339,13 @@ $result = $mysqli->query("SELECT * FROM carousel_slides");
         </div>
     </section>
     
+    <section id="localização"class="container">
+        <div class="mt-5 d-flex justify-content-between">
+            <h4 class="pt-5"><i class="bi bi-geo-alt"></i> Localização</h4>                       
+        </div>
+        <hr>
+    </section>
+
     <?php include '../../componentes/footerSeguro.php'; ?>
 </body>
 </html>

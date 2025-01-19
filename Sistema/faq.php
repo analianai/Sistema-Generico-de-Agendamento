@@ -28,7 +28,7 @@
         <div class="container">
             
             <div class="row text-center">
-                <div class="col-md-5">
+                <div class=" col-12 col-md-5">
                 <h2 class="text-center mb-4">Contato</h2>
                     <h5>Telefone</h5>
                     <p>(11) 1234-5678</p>
@@ -37,7 +37,7 @@
                     <h5>Endereço</h5>
                     <p>Rua Exemplo, 123 - São Paulo, SP</p>
                 </div>
-                <div class="col-md-7">
+                <div class="col-12 col-md-7">
                     <div class="container">
                 <h2 class="text-center mb-4">Perguntas Frequentes</h2>
                 <div class="accordion" id="faqAccordion">
