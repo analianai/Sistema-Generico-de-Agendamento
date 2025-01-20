@@ -62,7 +62,7 @@ while ($row = $resultCategorias->fetch_assoc()) {
 //Carousel
 $resultCarousel = $mysqli->query("SELECT * FROM carousel_slides");
 
-//localização
+//LOCALIZAÇÃO
 
 // Busca os dados de localização
 $queryLocalizacao = "
@@ -223,6 +223,7 @@ $mysqli->close();
         <div>
             <h2>Localização</h2>
             <div class="row mt-5 pt-4">
+                <div class="card p-3">
                 <?php foreach ($localizacao as $local): ?>
                     <div class="col-md-4">
                         <div class="">
@@ -247,6 +248,7 @@ $mysqli->close();
                         </div>
                     </div>
                 <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </section>

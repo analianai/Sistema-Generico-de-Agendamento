@@ -106,20 +106,97 @@ if (isset($_GET['delete'])) {
 }
 
 // Recuperar slides
-$result = $mysqli->query("SELECT * FROM carousel_slides");
+$resultCarousel = $mysqli->query("SELECT * FROM carousel_slides");
 
 //LOCALIZAÇÃO  
 
-// Busca os dados de localização
-$sql = "SELECT telefone, email, endereco, mapa FROM localizacao LIMIT 1";
-$result = $mysqli->query($sql);
+//Inserir Localização
+// Inserir nova localização
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionlocal']) && $_POST['actionlocal'] == 'add') {
+    $telefone = $_POST['telefone'];
+    $email = $_POST['email'];
+    $endereco = $_POST['endereco'];
+    $mapa = $_POST['mapa'];
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    echo json_encode($row);
-} else {
-    echo json_encode(["telefone" => "", "email" => "", "endereco" => "", "mapa" => ""]);
+    // Query para inserir a nova localização
+    $stmt = $mysqli->prepare("INSERT INTO localizacao (telefone, email, endereco, mapa) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param('ssss', $telefone, $email, $endereco, $mapa);
+
+    if ($stmt->execute()) {
+        $_SESSION['mensagem_sucesso'] = 'Localização adicionada com sucesso!';
+    } else {
+        $_SESSION['mensagem_erro'] = 'Erro ao adicionar a localização!';
+    }
+
+    // Redirecionar para evitar reenvio do formulário
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
+
+// visualizar os dados de localização
+$queryLocalizacao = "
+    SELECT 
+        local_id, telefone, email, endereco, mapa 
+    FROM 
+        localizacao 
+    LIMIT 1";
+
+$resultLocalizacao = $mysqli->query($queryLocalizacao);
+
+$localizacao = [];
+while ($row = $resultLocalizacao->fetch_assoc()) {
+    $localizacao[] = $row;
+}
+
+// Atualizar localização
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateLocal'])) {
+    $id_local = $_POST['local_id'];
+    $telefone = $_POST['telefone'];
+    $email = $_POST['email'];
+    $endereco = $_POST['endereco'];
+    $mapa = $_POST['mapa'];
+
+    // Query para atualizar os dados da localização
+    $stmt = $mysqli->prepare("UPDATE localizacao SET telefone = ?, email = ?, endereco = ?, mapa = ? WHERE local_id = ?");
+    $stmt->bind_param('ssssi', $telefone, $email, $endereco, $mapa, $id_local);
+    
+    if ($stmt->execute()) {
+        $_SESSION['mensagem_sucesso'] = 'Localização atualizada com sucesso!';
+    } else {
+        $_SESSION['mensagem_erro'] = 'Erro ao atualizar a localização!';
+    }
+
+    // Redirecionar para evitar reenvio do formulário
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Excluir localização
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteLocal'])) {
+    $action = $_POST['deleteLocal'];
+    // deletar localização
+    if ($action === 'deleteLocal') {
+        $id_local = $_POST['local_id'];
+
+        // Deletar do BD
+        $stmt = $mysqli->prepare("DELETE FROM localizacao WHERE local_id = ?");
+        $stmt->bind_param('i', $id_local);
+        $stmt->execute();
+
+        $_SESSION['mensagem_sucesso'] = 'Localização deletada com sucesso!';
+
+    } else {
+        $_SESSION['mensagem_erro'] = 'Erro ao deletar a localização!';
+    }
+
+    // Redirecionar para evitar reenvio do formulário
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+
+// Recuperar localização
+$resultlocal = $mysqli->query("SELECT * FROM localizacao");
 
 $mysqli->close();
 ?>
@@ -156,6 +233,10 @@ $mysqli->close();
             border-color: rgb(28, 229, 28);
             background-color: rgb(28, 229, 28);
         }
+        .bg-lilas{
+            color: #fff;
+            background-color: #6f42c1;
+        }
         .card-img-top {
             height: 200px;
             object-fit: cover;
@@ -180,6 +261,7 @@ $mysqli->close();
 <body>
     <?php include '../../componentes/erro.php'; ?>
     <?php include '../../componentes/menuSeguro.php'; ?>
+
     <section id="cabecalho" class="container">
         <div class="mt-5 d-flex justify-content-between">
             <h3 class="pt-5"><i class="bi bi-globe"></i> Gerenciar Site</h3>
@@ -194,7 +276,7 @@ $mysqli->close();
                 </button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-outline-lilas mb-3 tamanho" data-bs-toggle="modal" data-bs-target="#localizacaoModal">
+                <button type="button" class="btn btn-outline-lilas mb-3 tamanho"  data-bs-toggle="modal" data-bs-target="#NovoLocalaModal">
                     <i class="bi bi-person-fill-gear fs-2"></i><br> localização
                 </button>
             </div>
@@ -251,15 +333,15 @@ $mysqli->close();
             </div>
         </div>
     </section>
-    <!-- Visualizar imagem do carousel -->
+    <!-- Carousel -->
     <section id="visualizar_carousel" class="container">
-        <div class="mt-5 d-flex justify-content-between">
-            <h4 class="pt-5"><i class="bi bi-images"></i> Visualizar imagens do Slide</h4>                       
+        <div class="mt-3 d-flex justify-content-between">
+            <h4 class="pt-2"><i class="bi bi-images"></i> Visualizar imagens do Slide</h4>                       
         </div>
         <hr>
 
         <div class="row d-flex justify-content-center">
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php while ($row = $resultCarousel->fetch_assoc()): ?>
                 <!-- Visualizar carousel -->
                 <div class="col-md-3 mb-4">
                     <div class="card" id="card">
@@ -338,12 +420,164 @@ $mysqli->close();
             <?php endwhile; ?>
         </div>
     </section>
-    
-    <section id="localização"class="container">
-        <div class="mt-5 d-flex justify-content-between">
-            <h4 class="pt-5"><i class="bi bi-geo-alt"></i> Localização</h4>                       
+    <!--localização-->
+    <section id="localizacao" class="container mb-5">
+        <div class="mt-3 d-flex justify-content-between">
+            <h4 class="pt-2"><i class="bi bi-geo-alt"></i> Visualizar Localização</h4>                       
         </div>
         <hr>
+        <!-- Button new localização -->
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn text-primary mb-2" data-bs-toggle="modal" data-bs-target="#NovoLocalaModal">
+                    <i class="bi bi-plus"></i> Nova localização
+                </button>
+            </div>
+            <div class="col-md-6 text-end">
+                <button type="button" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#NovoLocalaModal">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
+            </div>
+        </div> 
+
+        <!-- Nova localização Modal -->
+    <div class="modal fade" id="NovoLocalaModal" tabindex="-1" aria-labelledby="NovoLocalaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center bg-lilas">
+                    <h1 class="modal-title fs-5 w-100" id="NovoLocalaModalLabel">Nova Localização</h1>
+                    <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="actionlocal" value="add">
+                        <div class="mb-3">
+                            <label for="telefone" class="form-label">Telefone:</label>
+                            <input type="text" class="form-control" name="telefone" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="endereco" class="form-label">Endereço:</label>
+                            <input type="text" class="form-control" name="endereco" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mapa" class="form-label">URL do Google Maps:</label>
+                            <input type="text" class="form-control" name="mapa" required>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="button" class="btn btn-outline-danger mt-4 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                            <button type="submit" class="btn btn-outline-success mt-4"><i class="bi bi-save"></i> Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row mt-5 pt-4">
+            <?php foreach ($localizacao as $local): ?>
+                <div class="col-md-4">
+                    <div class="card p-2">
+                        <h5 class="text-center m-2 card-title"><strong>Editar Localização</strong></h5>
+                        <p class="lead"><strong>Telefone: </strong><?= htmlspecialchars($local['telefone']); ?></p>
+                        <p class="lead"><strong>Email: </strong><?= htmlspecialchars($local['email']); ?></p>
+                        <p class="lead"><strong>Endereço: </strong><?= htmlspecialchars($local['endereco']); ?></p>  
+                        <div class="text-center mt-3 mb-3">
+                        <!-- Botão Atualizar localização -->
+                            <a href="#" 
+                            class="btn btn-outline-success me-2" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="<?php echo '#updateLocalModal' . $local['local_id']; ?>">
+                            <i class="bi bi-arrow-repeat"></i> Atualizar
+                            </a>
+
+                            <!-- Botão Excluir localização -->
+                            <a href="#" 
+                            class="btn btn-outline-danger" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="<?php echo '#deletelocalModal' . $local['local_id']; ?>">
+                            <i class="bi bi-trash"></i> Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="map-responsive">
+                        <iframe src="<?= htmlspecialchars($local['mapa']); ?>" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <!-- Modal Excluir Localização -->
+                <div class="modal fade" id="deletelocalModal<?= $local['local_id'] ?>" tabindex="-1" aria-labelledby="deletelocalModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header text-center bg-danger text-white">
+                                <h3 class="modal-title fs-5 w-100" id="deletelocalModalLabel">Deseja deletar dados de localização?</h3>
+                                <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <p class="text-danger">*Ao excluir os dados será definitivo, não poderá recuperar!</p>
+                                <form action="" method="POST" style="display:inline;">
+                                    <input type="hidden" name="deleteLocal" value="deleteLocal">
+                                    <input type="hidden" name="local_id" value="<?= $local['local_id'] ?>">
+                                    <button type="button" class="btn btn-outline-success mt-2 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Não</button>
+                                    <button type="submit" class="btn btn-outline-danger mt-2"><i class="bi bi-trash"></i> Sim</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Atualizar Localização -->
+                <div class="modal fade" id="updateLocalModal<?= $local['local_id'] ?>" tabindex="-1" aria-labelledby="updateLocalModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h3 class="modal-title w-100 text-center" id="updateLocalModalLabel">Atualizar Localização</h3>
+                                <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    <input type="hidden" name="updateLocal" value="updateLocal">
+                                    <input type="hidden" name="local_id" value="<?= $local['local_id'] ?>">
+
+                                    <div class="mb-3">
+                                        <label for="telefone" class="form-label">Telefone:</label>
+                                        <input type="text" class="form-control" name="telefone" value="<?= htmlspecialchars($local['telefone']); ?>" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email:</label>
+                                        <input type="email" class="form-control" name="email" value="<?= htmlspecialchars($local['email']); ?>" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="endereco" class="form-label">Endereço:</label>
+                                        <input type="text" class="form-control" name="endereco" value="<?= htmlspecialchars($local['endereco']); ?>" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="mapa" class="form-label">URL do Google Maps:</label>
+                                        <input type="text" class="form-control" name="mapa" value="<?= htmlspecialchars($local['mapa']); ?>" required>
+                                    </div>
+                                    <div class="mb-3 text-center">
+                                        <button type="button" class="btn btn-outline-danger mt-4 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                        <button type="submit" class="btn btn-outline-success mt-4"><i class="bi bi-save"></i> Atualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
     </section>
 
     <?php include '../../componentes/footerSeguro.php'; ?>

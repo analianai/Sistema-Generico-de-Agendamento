@@ -44,10 +44,8 @@ if ($mysqli->connect_error) {
 <body>
     <!-- Mensagem de erro -->
     <?php include '../../componentes/erro.php'; ?>
-
     <!-- menu -->
     <?php include '../../componentes/menuSeguro.php'; ?>
-
     <!--Header-->
     <section class="container">
         <div class="mt-5 d-flex justify-content-between">
@@ -56,7 +54,7 @@ if ($mysqli->connect_error) {
         </div>
         <hr>
         <!-- Button NOVA categoria, visualizar categoria e Serviço -->
-         <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 <button type="button" class="btn text-primary mb-2" data-bs-toggle="modal" data-bs-target="#NovaCategoriaModal">
                     <i class="bi bi-plus"></i> Nova Categoria
@@ -367,7 +365,7 @@ if ($mysqli->connect_error) {
                             </div>
                         </div>
 
-                        <!-- Modal de Confirmação de Deleção Categoria-->
+                        <!-- Modal de Confirmação de Deleção Serviço-->
                         <div class="modal fade" id="DeletarServico<?= $servico['id'] ?>" tabindex="-1" aria-labelledby="DeletarServicoLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
