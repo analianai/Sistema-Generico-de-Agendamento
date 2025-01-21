@@ -54,8 +54,8 @@ Este projeto é um site responsivo Genérico de Agendamento e utiliza como exemp
 |-- midia.php         # Página de mídia
 |-- servicos.php      # Página de serviços
 |-- faq.php           # Contato e duvidas
-|-- sing_in.php       # Página de login
-|-- sing_in.php       # Página de Cadastro
+|-- sign_in.php       # Página de login
+|-- sign_in.php       # Página de Cadastro
 |-- /assets           # Diretório de midias
 |-- ----/css          # Diretório de arquivos CSS (opcional)
 |-- ----/img          # Diretório de imagens
