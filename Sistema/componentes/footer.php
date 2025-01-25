@@ -1,4 +1,4 @@
-    <footer class="text-center text-lg-start bg-light text-muted pt-3 bg-success-subtle">
+    <footer class="text-center text-lg-start bg-dark-subtle text-muted pt-3 bg-success-subtle">
         <section class="">
             <div class="container text-center text-md-start mt-5">
                 <div class="row mt-3">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </section>
-        <div class="text-center p-4 bg-success bg-gradient text-white">
+        <div class="text-center p-4 bg-black bg-gradient text-white">
             © 2024 Salão de Beleza. Todos os direitos reservados.
         </div>
     </footer>

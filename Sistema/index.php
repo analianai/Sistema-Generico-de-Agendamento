@@ -30,8 +30,8 @@ while ($row = $result->fetch_assoc()) {
     $depoimentos[] = $row;
 }
 
-
 //VISUALIZAR CATEGORIAS
+
 // Consulta para pegar a 3 últimos categorias
 $queryCategorias = "
     SELECT 
@@ -73,6 +73,7 @@ $queryLocalizacao = "
         mapa 
         FROM 
         localizacao 
+        ORDER BY local_id DESC
         LIMIT 1";
 $resultLocalizacao = $mysqli->query($queryLocalizacao);
 
@@ -223,23 +224,25 @@ $mysqli->close();
         <div>
             <h2>Localização</h2>
             <div class="row mt-5 pt-4">
-                <div class="card p-3">
+                
                 <?php foreach ($localizacao as $local): ?>
                     <div class="col-md-4">
-                        <div class="">
-                            <h5 class="text-center mb-3 lead"><strong>Entre em Contato</strong></h5>
-                            <p class="lead"><strong>Telefone: </strong><?= htmlspecialchars($local['telefone']); ?></p>
-                            <p class="lead"><strong>Email: </strong><?= htmlspecialchars($local['email']); ?></p>
-                            <p class="lead"><strong>Endereço: </strong><?= htmlspecialchars($local['endereco']); ?></p>  
-                        </div>
-                        <div class="me-5 d-none d-lg-block text-center mb-1 mt-3">
-                            <span>Conecte-se conosco nas redes sociais: </span>
-                        </div>
-                        <div class="me-5 d-none d-lg-block text-center fs-3">
-                            <a href="#" class="me-4 text-reset"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="me-4 text-reset"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="me-4 text-reset"><i class="bi bi-youtube"></i></a>
-                            <a href="#" class="me-4 text-reset"><i class="bi bi-whatsapp"></i></a>
+                        <div class="card p-3">
+                            <div class="">
+                                <h5 class="text-center mb-3 lead fs-3"><strong>Entre em Contato</strong></h5>
+                                <p class="lead"><strong>Telefone: </strong><?= htmlspecialchars($local['telefone']); ?></p>
+                                <p class="lead"><strong>Email: </strong><?= htmlspecialchars($local['email']); ?></p>
+                                <p class="lead"><strong>Endereço: </strong><?= htmlspecialchars($local['endereco']); ?></p>  
+                            </div>
+                            <div class="d-none d-lg-block text-center mb-1 mt-3">
+                                <span>Conecte-se conosco nas redes sociais: </span>
+                            </div>
+                            <div class="d-none d-lg-block text-center fs-3">
+                                <a href="#" class="me-4 text-reset"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="me-4 text-reset"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="me-4 text-reset"><i class="bi bi-youtube"></i></a>
+                                <a href="#" class="me-4 text-reset"><i class="bi bi-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -248,7 +251,6 @@ $mysqli->close();
                         </div>
                     </div>
                 <?php endforeach; ?>
-                </div>
             </div>
         </div>
     </section>

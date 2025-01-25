@@ -74,6 +74,14 @@ CREATE TABLE carousel_slides (
     active BOOLEAN DEFAULT FALSE,
 );
 
+CREATE TABLE midia (
+    midia_id INT AUTO_INCREMENT PRIMARY KEY,
+    tipo ENUM('foto', 'video', 'youtube') NOT NULL,
+    caminho VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255) DEFAULT NULL,
+    data_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 --ususarios---
 INSERT INTO usuarios (

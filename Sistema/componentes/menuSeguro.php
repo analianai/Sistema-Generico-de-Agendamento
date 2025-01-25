@@ -23,6 +23,7 @@ function menuSeguro($nivel_acesso, $usuario_logado) {
                         <?php if ($nivel_acesso == ADMIN): ?>
                             <li><a class="dropdown-item" href="admin_dashboard.php"><i class="bi bi-house-check-fill"></i> Home</a></li>
                             <li><a class="dropdown-item" href="#" data-bs-toggle="dropdown"><i class="bi bi-globe"></i> Gerenciar Sites</a></li>
+                            <li><a class="dropdown-item" href="admin_midia.php"><i class="bi bi-camera-reels"></i> Mídia</a></li>
                             <li><a class="dropdown-item" href="admin_depoimentos.php"><i class="bi bi-megaphone"></i> Depoimentos</a></li>
                             <li><a class="dropdown-item" href="admin_servicos.php"><i class="bi bi-house-gear-fill"></i> Serviços</a></li>
                             <li><a class="dropdown-item" href="admin_relatorio.php"><i class="bi bi-graph-up-arrow"></i> Relatórios</a></li>

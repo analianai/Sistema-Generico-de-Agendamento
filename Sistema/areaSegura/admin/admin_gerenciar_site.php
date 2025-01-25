@@ -110,7 +110,6 @@ $resultCarousel = $mysqli->query("SELECT * FROM carousel_slides");
 
 //LOCALIZAÇÃO  
 
-//Inserir Localização
 // Inserir nova localização
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actionlocal']) && $_POST['actionlocal'] == 'add') {
     $telefone = $_POST['telefone'];
@@ -139,7 +138,8 @@ $queryLocalizacao = "
         local_id, telefone, email, endereco, mapa 
     FROM 
         localizacao 
-    LIMIT 1";
+    ORDER BY 
+    local_id DESC";
 
 $resultLocalizacao = $mysqli->query($queryLocalizacao);
 
@@ -147,6 +147,10 @@ $localizacao = [];
 while ($row = $resultLocalizacao->fetch_assoc()) {
     $localizacao[] = $row;
 }
+
+// Recuperar categorias existentes
+$localizacao = $mysqli->query("SELECT local_id, telefone, email, endereco, mapa FROM localizacao ORDER BY local_id DESC")->fetch_all(MYSQLI_ASSOC);
+
 
 // Atualizar localização
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateLocal'])) {
@@ -281,8 +285,8 @@ $mysqli->close();
                 </button>
             </div>
             <div class="col">
-                <button onclick="" type="button" class="btn btn-outline-primary mb-3 tamanho">
-                    <i class="bi bi-camera-reels fs-2"></i><br> Midia
+                <button onclick="window.location.href='admin_midia.php'" type="button" class="btn btn-outline-primary mb-3 tamanho">
+                    <i class="bi bi-camera-reels fs-2"></i><br> Mídia
                 </button>
             </div>
  
@@ -441,55 +445,58 @@ $mysqli->close();
         </div> 
 
         <!-- Nova localização Modal -->
-    <div class="modal fade" id="NovoLocalaModal" tabindex="-1" aria-labelledby="NovoLocalaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center bg-lilas">
-                    <h1 class="modal-title fs-5 w-100" id="NovoLocalaModalLabel">Nova Localização</h1>
-                    <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="actionlocal" value="add">
-                        <div class="mb-3">
-                            <label for="telefone" class="form-label">Telefone:</label>
-                            <input type="text" class="form-control" name="telefone" required>
-                        </div>
+        <div class="modal fade" id="NovoLocalaModal" tabindex="-1" aria-labelledby="NovoLocalaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-center bg-lilas">
+                        <h1 class="modal-title fs-5 w-100" id="NovoLocalaModalLabel">Nova Localização</h1>
+                        <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg fs-5"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="actionlocal" value="add">
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="text" class="form-control" name="telefone" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="endereco" class="form-label">Endereço:</label>
-                            <input type="text" class="form-control" name="endereco" required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="endereco" class="form-label">Endereço:</label>
+                                <input type="text" class="form-control" name="endereco" required>
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="mapa" class="form-label">URL do Google Maps:</label>
-                            <input type="text" class="form-control" name="mapa" required>
-                        </div>
-                        <div class="mb-3 text-center">
-                            <button type="button" class="btn btn-outline-danger mt-4 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
-                            <button type="submit" class="btn btn-outline-success mt-4"><i class="bi bi-save"></i> Enviar</button>
-                        </div>
-                    </form>
+                            <div class="mb-3">
+                                <label for="mapa" class="form-label">URL do Google Maps:</label>
+                                <input type="text" class="form-control" name="mapa" required>
+                            </div>
+                            <div class="mb-3 text-center">
+                                <button type="button" class="btn btn-outline-danger mt-4 me-2" data-bs-dismiss="modal"><i class="bi bi-x-octagon-fill"></i> Cancelar</button>
+                                <button type="submit" class="btn btn-outline-success mt-4"><i class="bi bi-save"></i> Enviar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
         <div class="row mt-5 pt-4">
-            <?php foreach ($localizacao as $local): ?>
+            <?php foreach ($localizacao as $index => $local): ?>
                 <div class="col-md-4">
                     <div class="card p-2">
-                        <h5 class="text-center m-2 card-title"><strong>Editar Localização</strong></h5>
+                    <div class="map-responsive">
+                        <iframe src="<?= htmlspecialchars($local['mapa']); ?>" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                        <h5 class="text-center m-2 card-title"><strong>Endereço e Localização</strong></h5>
                         <p class="lead"><strong>Telefone: </strong><?= htmlspecialchars($local['telefone']); ?></p>
                         <p class="lead"><strong>Email: </strong><?= htmlspecialchars($local['email']); ?></p>
                         <p class="lead"><strong>Endereço: </strong><?= htmlspecialchars($local['endereco']); ?></p>  
                         <div class="text-center mt-3 mb-3">
-                        <!-- Botão Atualizar localização -->
+                            <!-- Botão Atualizar localização -->
                             <a href="#" 
                             class="btn btn-outline-success me-2" 
                             data-bs-toggle="modal" 
@@ -505,11 +512,6 @@ $mysqli->close();
                             <i class="bi bi-trash"></i> Excluir
                             </a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="map-responsive">
-                        <iframe src="<?= htmlspecialchars($local['mapa']); ?>" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 
